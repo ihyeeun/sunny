@@ -26,6 +26,8 @@
   "include": ["src"],
   "baseUrl": ".",
   "paths": {
+    "@commons/*": ["./src/shared/commons/*"],
+    "@shared/*": ["./src/shared/*"],
     "@/*": ["./src/*"]
   }
 }
