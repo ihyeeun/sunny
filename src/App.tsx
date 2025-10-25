@@ -1,17 +1,17 @@
-import AuthLayout from "@/features/auth/components/auth-layout";
-import IndexPage from "@/pages/index-page";
-import SignInPage from "@/pages/sign-in-page";
-import SignUpPage from "@/pages/sign-up-page";
+import { AuthLayout } from "@features/auth";
+import { SignInPage, SignUpPage } from "@pages/auth";
+import IndexPage from "@pages/index-page";
+import { PATH } from "@shared/constants/path";
 import { Route, Routes } from "react-router";
 import "./App.css";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<IndexPage />} />
+      <Route path={PATH.INDEX} element={<IndexPage />} />
       <Route element={<AuthLayout />}>
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path={PATH.SIGN_IN} element={<SignInPage />} />
+        <Route path={PATH.SIGN_UP} element={<SignUpPage />} />
       </Route>
     </Routes>
   );
