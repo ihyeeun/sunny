@@ -1,7 +1,9 @@
 <details>
-  <summary>폴더 구조</summary>
+  <summary>Frontend Folder Structure <Code> Click me 🙌 </Code> </summary>
 
-```
+  <br/>
+  
+```bash
 src/
 ├── features/                     # 도메인(기능)별 핵심 비즈니스 로직
 │   └── feature(domain)/
@@ -35,18 +37,17 @@ src/
 └── main.tsx                      # 진입점
 ```
 
-**주의사항**
-shared/_에서 features/_ import 금지
-shared/utils에서는 shared/lib import 금지 (순수성 보장)
-features/\*/utils는 같은 feature 내부 또는 shared만 import
+## 주의사항
++ `shared/`에서 `features/` import 금지<br/>
++ `shared/utils`에서는 `shared/lib` import 금지 (순수성 보장)<br/>
++ `features/*/utils`는 같은 feature 내부 또는 shared만 import<br/>
 
-```
-// features/feature/index.ts
+> features/feature/**index.ts**<br/>
+> Barrel 최소화 및 외부에 노출할 최소 API만 re-export<br/>
+> Page + 필요한 최소 컴포넌트 + type-only만 내보내고, API/hooks/도메인 유틸은 절대 외부에 노출하지 마세요.<br/>
+> 다른 feature에 의존하지 않도록 결합도를 낮추기 위해서임.<br/>
 
-// Page + 필요한 최소 컴포넌트 + type-only만 내보내고,
-// API/hooks/도메인 유틸은 절대 외부에 노출하지 마세요.
-// 다른 feature에 의존하지 않도록 결합도를 낮추기 위해서임.
-
+```ts
 // 타입은 type-only export 권장
 export type { Todo, TodoId } from './types/todo';
 
@@ -57,5 +58,7 @@ export { TodoCard } from './components/TodoCard';
 export { default as TodoListPage } from './pages/TodoListPage';
 export { default as TodoDetailPage } from './pages/TodoDetailPage';
 ```
+
+<hr/>
 
 </details>
