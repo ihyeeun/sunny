@@ -1,54 +1,61 @@
-# React + TypeScript + Vite
+<details>
+  <summary>폴더 구조</summary>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```
+src/
+├── features/                     # 도메인(기능)별 핵심 비즈니스 로직
+│   └── feature(domain)/
+│       ├── types/
+│       ├── constants/
+│       │   ├── endpoint.ts       # 서버 API 경로 로컬 관리
+│       │   └── query-key.ts      # 서버 상태 관리 캐싱 값
+│       ├── utils/                # 비즈니스에 종속된 규칙, 형식화(이 로직은 다른 도메인에서 재사용 X)
+│       ├── api/
+│       ├── hooks/
+│       │   ├── queries/          # rule : useXxxQuery.ts
+│       │   └── mutations/        # rule : useXxxMutation.ts
+│       ├── contexts/             # feature(domain) 내부의 지역 상태 관리
+│       ├── components/
+│       ├── pages/
+│       └── index.ts              # Page, Component, Type만 import하도록 표면을 최소화
+│
+├── shared/                       # 프로젝트 전역 공유 리소스
+│   ├── ui/
+│   │   ├── shadcn                # 프레임 워크 UI 컴포넌트
+│   │   └── commons               # 프로젝트 공통 컴포넌트
+│   ├── constants/
+│   │   └─ path.ts                # 프론트 URL(라우트) 전역 관리
+│   ├── utils/                    # 도메인 불문 순수 함수
+│   ├── lib/                      # 외부 라이브러리를 import하고, 프로젝트 코드가 일관된 방식으로 사용할 수 있는 인터페이스를 제공하도록 한다. 라이브러리의 설정/초기화/공통 처리 등등
+│   │   └── api/
+│   ├── hooks/                    # 서버 상태를 쉽게 다루게 해주는 공통 훅/래퍼
+│   └── store/                    # 전역 상태 관리
+│
+├── App.tsx                       # Route
+└── main.tsx                      # 진입점
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**주의사항**
+shared/_에서 features/_ import 금지
+shared/utils에서는 shared/lib import 금지 (순수성 보장)
+features/\*/utils는 같은 feature 내부 또는 shared만 import
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
+// features/feature/index.ts
+
+// Page + 필요한 최소 컴포넌트 + type-only만 내보내고,
+// API/hooks/도메인 유틸은 절대 외부에 노출하지 마세요.
+// 다른 feature에 의존하지 않도록 결합도를 낮추기 위해서임.
+
+// 타입은 type-only export 권장
+export type { Todo, TodoId } from './types/todo';
+
+// 외부에서 재사용해도 되는 컴포넌트만 공개
+export { TodoCard } from './components/TodoCard';
+
+// Page 진입점만 공개 (라우트에서 사용)
+export { default as TodoListPage } from './pages/TodoListPage';
+export { default as TodoDetailPage } from './pages/TodoDetailPage';
+```
+
+</details>
