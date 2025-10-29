@@ -60,12 +60,7 @@ export default tseslint.config(
 
         // 1) 기본: 변수/함수/파라미터/메서드 = camelCase
         {
-          selector: [
-            "parameter",
-            "classMethod",
-            "objectLiteralMethod",
-            "typeMethod",
-          ],
+          selector: ["parameter", "classMethod", "typeMethod"],
           format: ["camelCase"],
           leadingUnderscore: "allow", // _id, _unused 허용
         },
