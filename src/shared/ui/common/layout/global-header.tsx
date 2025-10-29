@@ -10,8 +10,7 @@ export default function GlobalHeader() {
   return (
     <header className="h-10 border-b">
       <div className="layout-container flex h-full justify-between">
-        {/* <Link to={PATH.ROOT} className="flex items-center gap-1"> */}
-        <Link to={"/"} className="flex items-center gap-1">
+        <Link to={PATH.ROOT} className="flex items-center gap-1">
           <img
             className="h-7"
             src={logo}
