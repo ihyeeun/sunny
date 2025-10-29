@@ -62,3 +62,12 @@ export { default as TodoDetailPage } from './pages/TodoDetailPage';
 <hr/>
 
 </details>
+
+
+<details>
+  
+<summary>기술 스택 <Code> Click me 🙌 </Code> </summary>
+frontend - React+vite, TypeScript, tailwindcss, shadcn/ui, Zustand, Tanstack Query <br/>
+backend - supabase <br/>
+  
+</details>
