@@ -1,17 +1,14 @@
-import { AuthLayout } from "@features/auth";
-import { SignInPage, SignUpPage } from "@pages/auth";
-import IndexPage from "@pages/index-page";
-import { PATH } from "@shared/constants/path";
 import { Route, Routes } from "react-router";
+
+import { GlobalLayout } from "@shared/ui/common";
+
 import "./App.css";
 
 function App() {
   return (
     <Routes>
-      <Route path={PATH.INDEX} element={<IndexPage />} />
-      <Route element={<AuthLayout />}>
-        <Route path={PATH.SIGN_IN} element={<SignInPage />} />
-        <Route path={PATH.SIGN_UP} element={<SignUpPage />} />
+      <Route element={<GlobalLayout />}>
+        {/* 모든 페이지에 global Layout 을 적용하기 위해 이 route 안에 페이지 라우팅 */}
       </Route>
     </Routes>
   );
