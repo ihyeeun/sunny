@@ -118,3 +118,9 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .layout-container {
+    @apply m-auto w-full max-w-250 px-4;
+  }
+}
