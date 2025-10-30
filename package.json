@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "type-gen": "dotenv -e src/.env -- sh -c 'supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/raw-database.types.ts'"
+    "type-gen": "dotenv -e .env -- sh -c 'supabase gen types typescript --project-id \"$SUPABASE_PROJECT_ID\" --schema public > src/raw-database.types.ts'"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
