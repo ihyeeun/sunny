@@ -1,15 +1,28 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { toast } from "sonner";
 
 import { PATH } from "@shared/constants/path";
 import { Button, Input } from "@shared/ui/shadcn";
+import { generateErrorMessage } from "@features/auth/constants/auth-error-message-kr";
 import { useSignUpMutation } from "@features/auth/hooks/mutations/use-sign-up-mutation";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: submitSignUpForm } = useSignUpMutation();
+  const { mutate: submitSignUpForm, isPending: isSignUpPending } =
+    useSignUpMutation({
+      onSuccess: () => {
+        toast.success("회원가입을 성공했습니다. 잠시만 기다려주세요.", {
+          position: "top-center",
+        });
+      },
+      onError: (error) => {
+        const errorMsg = generateErrorMessage(error);
+        toast.error(errorMsg, { position: "top-center" });
+      },
+    });
 
   const handleSignupClick = () => {
     if (email.trim() === "") return;
@@ -27,16 +40,22 @@ export default function SignUpPage() {
           placeholder="example@abc.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isSignUpPending}
         />
         <Input
           type="password"
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isSignUpPending}
         />
       </div>
       <div className="flex flex-col gap-2">
-        <Button className="w-full" onClick={handleSignupClick}>
+        <Button
+          className="w-full"
+          onClick={handleSignupClick}
+          disabled={isSignUpPending}
+        >
           Create Account
         </Button>
         <Link to={PATH.AUTH.SIGN_IN}>
