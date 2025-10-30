@@ -4,18 +4,26 @@ import { Link } from "react-router";
 import { PATH } from "@shared/constants/path";
 import { Button, Input } from "@shared/ui/shadcn";
 import { useSignInMutatioin } from "@features/auth/hooks/mutations/use-sign-in-mutation";
+import { useSignInWithOAuthMutation } from "@features/auth/hooks/mutations/use-sign-in-with-oauth-mutation";
+
+import githubLogo from "@/assets/github-mark.svg";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { mutate: submitSignInForm } = useSignInMutatioin();
+  const { mutate: submitSignInWithPW } = useSignInMutatioin();
+  const { mutate: submitSignInWithOAuth } = useSignInWithOAuthMutation();
 
   const handleSignInClick = () => {
     if (email.trim() === "") return;
     if (password.trim() === "") return;
 
-    submitSignInForm({ email, password });
+    submitSignInWithPW({ email, password });
+  };
+
+  const handleSignInGithubClick = () => {
+    submitSignInWithOAuth("github");
   };
 
   return (
@@ -38,6 +46,14 @@ export default function SignInPage() {
       <div className="flex flex-col gap-2">
         <Button className="w-full" onClick={handleSignInClick}>
           Login
+        </Button>
+        <Button
+          className="w-full"
+          variant={"outline"}
+          onClick={handleSignInGithubClick}
+        >
+          <img src={githubLogo} className="h-5 w-5" />
+          Github 계정으로 로그인
         </Button>
         <Link to={PATH.AUTH.SIGN_UP}>
           <p className="text-muted-foreground hover:bg-accent rounded-sm text-center text-xs hover:underline">
