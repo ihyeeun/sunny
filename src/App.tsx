@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from "react-router";
 
 import { PATH } from "@shared/constants/path";
 import { GlobalLayout } from "@shared/ui/common";
+import GuestGuard from "@shared/ui/common/layout/guest-guard";
+import MemberGuard from "@shared/ui/common/layout/member-guard";
 import {
   AuthLayout,
   ForgetPasswordPage,
@@ -20,26 +22,29 @@ function App() {
     <Routes>
       <Route element={<GlobalLayout />}>
         <Route path={PATH.ROOT} element={<IndexPage />} />
-        <Route element={<AuthLayout />}>
-          <Route path={PATH.AUTH.SIGN_IN} element={<SignInPage />} />
-          <Route path={PATH.AUTH.SIGN_UP} element={<SignUpPage />} />
+
+        <Route element={<GuestGuard />}>
+          <Route element={<AuthLayout />}>
+            <Route path={PATH.AUTH.SIGN_IN} element={<SignInPage />} />
+            <Route path={PATH.AUTH.SIGN_UP} element={<SignUpPage />} />
+          </Route>
+          <Route
+            path={PATH.AUTH.FORGET_PASSWORD}
+            element={<ForgetPasswordPage />}
+          />
         </Route>
 
-        <Route
-          path={PATH.AUTH.FORGET_PASSWORD}
-          element={<ForgetPasswordPage />}
-        />
-        <Route
-          path={PATH.AUTH.RESET_PASSWORD}
-          element={<ResetPasswordPage />}
-        />
-
-        <Route path={PATH.POST.DETAIL_ROUTE} element={<PostDetailPage />} />
-
-        <Route
-          path={PATH.PROFILE.DETAIL_ROUTE}
-          element={<ProfileDetailPage />}
-        />
+        <Route element={<MemberGuard />}>
+          <Route path={PATH.POST.DETAIL_ROUTE} element={<PostDetailPage />} />
+          <Route
+            path={PATH.PROFILE.DETAIL_ROUTE}
+            element={<ProfileDetailPage />}
+          />
+          <Route
+            path={PATH.AUTH.RESET_PASSWORD}
+            element={<ResetPasswordPage />}
+          />
+        </Route>
 
         {/* 위에 설정한 경로가 아닌 예외 경로로 요청이 오면 root 페이지로 이동 */}
         <Route path="*" element={<Navigate to={PATH.ROOT} />} />
