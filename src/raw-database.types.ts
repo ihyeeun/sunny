@@ -41,6 +41,30 @@ export interface Database {
         };
         Relationships: [];
       };
+      profile: {
+        Row: {
+          avatar_image: string | null;
+          bio: string;
+          created_at: string;
+          id: string;
+          nickname: string;
+        };
+        Insert: {
+          avatar_image?: string | null;
+          bio?: string;
+          created_at?: string;
+          id?: string;
+          nickname?: string;
+        };
+        Update: {
+          avatar_image?: string | null;
+          bio?: string;
+          created_at?: string;
+          id?: string;
+          nickname?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<never, never>;
     Functions: Record<never, never>;

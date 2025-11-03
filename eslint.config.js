@@ -66,7 +66,7 @@ export default tseslint.config(
         },
 
         {
-          selector: ["function", "variable"],
+          selector: ["function"],
           format: ["camelCase", "PascalCase"], // ← 컴포넌트 함수 허용
         },
 
