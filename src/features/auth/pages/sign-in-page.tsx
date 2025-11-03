@@ -94,6 +94,11 @@ export default function SignInPage() {
             계정이 없다면? 회원가입 하러 가기
           </p>
         </Link>
+        <Link to={PATH.AUTH.FORGET_PASSWORD}>
+          <p className="text-muted-foreground hover:bg-accent rounded-sm text-center text-xs hover:underline">
+            비밀번호를 잊으셨나요?
+          </p>
+        </Link>
       </div>
     </div>
   );
