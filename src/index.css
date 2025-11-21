@@ -127,6 +127,10 @@
   .auth-container {
     @apply flex w-full max-w-150 flex-col gap-4 p-4;
   }
+
+  .message-prompt {
+    @apply bg-muted flex items-center justify-between rounded-md px-2 py-1;
+  }
 }
 
 p {
