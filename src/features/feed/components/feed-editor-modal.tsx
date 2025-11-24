@@ -1,12 +1,26 @@
 import { useEffect, useRef, useState } from "react";
 import { ImageIcon } from "lucide-react";
+import { toast } from "sonner";
 
 import { useFeedEditorModal } from "@shared/store/modals/feed-editor-modal";
 import { Button, Dialog } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
+import { useFeedCreateMutation } from "@features/feed/hooks/mutations/use-feed-create-mutation";
 
 export default function FeedEditorModal() {
   const { isOpen, modalClose } = useFeedEditorModal();
+  const { mutate: feedCreate, isPending: isFeedCreating } =
+    useFeedCreateMutation({
+      onSuccess: () => {
+        modalClose();
+      },
+      onError: (error) => {
+        toast.error("피드 작성에 실패했습니다. 다시 시도해주세요.", {
+          position: "top-center",
+        });
+        console.error("Feed creation error:", error);
+      },
+    });
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -16,6 +30,7 @@ export default function FeedEditorModal() {
 
   const handlePostSave = () => {
     if (content.trim() === "") return;
+    feedCreate(content);
   };
 
   useEffect(() => {
@@ -41,12 +56,23 @@ export default function FeedEditorModal() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           ref={textareaRef}
+          disabled={isFeedCreating}
         />
-        <Button variant="outline" className="cursor-pointer">
+        <Button
+          variant="outline"
+          className="cursor-pointer"
+          disabled={isFeedCreating}
+        >
           <ImageIcon />
           <p>이미지 추가</p>
         </Button>
-        <Button className="cursor-pointer">저장</Button>
+        <Button
+          className="cursor-pointer"
+          onClick={handlePostSave}
+          disabled={isFeedCreating}
+        >
+          저장
+        </Button>
       </DialogContent>
     </Dialog>
   );
