@@ -1,13 +1,13 @@
 import { createPortal } from "react-dom";
 import type { ReactNode } from "react";
 
-import PostEditorModal from "@features/post/components/post-editor-modal";
+import FeedEditorModal from "@features/feed/components/feed-editor-modal";
 
 export default function ModalProvider({ children }: { children: ReactNode }) {
   return (
     <>
       {createPortal(
-        <PostEditorModal />,
+        <FeedEditorModal />,
         document.getElementById("modal-root")!,
       )}
       {children}

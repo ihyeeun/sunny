@@ -11,8 +11,8 @@ import {
   SignInPage,
   SignUpPage,
 } from "@features/auth";
+import FeedDetailPage from "@features/feed/pages/feed-detail-page";
 import { IndexPage } from "@features/home";
-import { PostDetailPage } from "@features/post";
 import { ProfileDetailPage } from "@features/user";
 
 import "./App.css";
@@ -35,7 +35,7 @@ function App() {
         </Route>
 
         <Route element={<MemberGuard />}>
-          <Route path={PATH.POST.DETAIL_ROUTE} element={<PostDetailPage />} />
+          <Route path={PATH.FEED.DETAIL_ROUTE} element={<FeedDetailPage />} />
           <Route
             path={PATH.PROFILE.DETAIL_ROUTE}
             element={<ProfileDetailPage />}

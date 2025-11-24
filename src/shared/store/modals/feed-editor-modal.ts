@@ -5,7 +5,7 @@ const initialState = {
   isOpen: false,
 };
 
-const usePostEditorModalStore = create(
+const useFeedEditorModalStore = create(
   devtools(
     combine(initialState, (set) => ({
       actions: {
@@ -17,19 +17,19 @@ const usePostEditorModalStore = create(
         },
       },
     })),
-    { name: "Post Editor Modal Store" },
+    { name: "Feed Editor Modal Store" },
   ),
 );
 
-export const usePostEditorModalOpen = () => {
-  const modalOpen = usePostEditorModalStore((store) => store.actions.modalOpen);
+export const useFeedEditorModalOpen = () => {
+  const modalOpen = useFeedEditorModalStore((store) => store.actions.modalOpen);
   return modalOpen;
 };
 
-export const usePostEditorModal = () => {
+export const useFeedEditorModal = () => {
   const {
     isOpen,
     actions: { modalOpen, modalClose },
-  } = usePostEditorModalStore();
+  } = useFeedEditorModalStore();
   return { isOpen, modalOpen, modalClose };
 };

@@ -1,9 +1,9 @@
-import CreatePostButton from "@features/post/components/create-post-button";
+import CreateFeedButton from "@features/feed/components/create-feed-button";
 
 export default function IndexPage() {
   return (
     <div className="flex flex-col">
-      <CreatePostButton />
+      <CreateFeedButton />
     </div>
   );
 }

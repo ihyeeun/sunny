@@ -14,7 +14,7 @@ export interface Database {
   };
   public: {
     Tables: {
-      post: {
+      feed: {
         Row: {
           author_id: string;
           content: string;

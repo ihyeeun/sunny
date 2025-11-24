@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { ImageIcon } from "lucide-react";
 
-import { usePostEditorModal } from "@shared/store/modals/post-editor-modal";
+import { useFeedEditorModal } from "@shared/store/modals/feed-editor-modal";
 import { Button, Dialog } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
 
-export default function PostEditorModal() {
-  const { isOpen, modalClose } = usePostEditorModal();
+export default function FeedEditorModal() {
+  const { isOpen, modalClose } = useFeedEditorModal();
   const [content, setContent] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleModalClose = () => {
     modalClose();
+  };
+
+  const handlePostSave = () => {
+    if (content.trim() === "") return;
   };
 
   useEffect(() => {

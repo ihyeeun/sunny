@@ -6,10 +6,10 @@ export const PATH = {
     FORGET_PASSWORD: "/forget-password",
     RESET_PASSWORD: "/reset-password",
   },
-  POST: {
-    ROOT: "/post",
-    DETAIL_ROUTE: "/post/:postId",
-    DETAIL_LINK: (postId: string) => `/post/${postId}`,
+  FEED: {
+    ROOT: "/feed",
+    DETAIL_ROUTE: "/feed/:feedId",
+    DETAIL_LINK: (feedId: string) => `/feed/${feedId}`,
   },
   PROFILE: {
     ROOT: "/profile",

@@ -1,9 +1,9 @@
 import { PlusCircle } from "lucide-react";
 
-import { usePostEditorModalOpen } from "@shared/store/modals/post-editor-modal";
+import { useFeedEditorModalOpen } from "@shared/store/modals/feed-editor-modal";
 
-export default function CreatePostButton() {
-  const modalOpen = usePostEditorModalOpen();
+export default function CreateFeedButton() {
+  const modalOpen = useFeedEditorModalOpen();
 
   return (
     <div onClick={modalOpen} className="message-prompt cursor-pointer">
