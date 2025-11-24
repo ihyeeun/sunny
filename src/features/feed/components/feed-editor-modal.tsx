@@ -1,11 +1,16 @@
-import { useEffect, useRef, useState } from "react";
-import { ImageIcon } from "lucide-react";
+import { type ChangeEvent, useEffect, useRef, useState } from "react";
+import { ImageIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { useFeedEditorModal } from "@shared/store/modals/feed-editor-modal";
 import { Button, Dialog } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
 import { useFeedCreateMutation } from "@features/feed/hooks/mutations/use-feed-create-mutation";
+
+interface Image {
+  file: File;
+  previewUrl: string;
+}
 
 export default function FeedEditorModal() {
   const { isOpen, modalClose } = useFeedEditorModal();
@@ -21,16 +26,40 @@ export default function FeedEditorModal() {
         console.error("Feed creation error:", error);
       },
     });
+
   const [content, setContent] = useState("");
+  const [images, setImages] = useState<Image[]>([]);
+
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleModalClose = () => {
     modalClose();
   };
 
-  const handlePostSave = () => {
+  const handleFeedSave = () => {
     if (content.trim() === "") return;
     feedCreate(content);
+  };
+
+  const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      files.forEach((file) => {
+        setImages((prev) => [
+          ...prev,
+          { file, previewUrl: URL.createObjectURL(file) },
+        ]);
+      });
+    }
+
+    e.target.value = "";
+  };
+
+  const handleDeleteImage = (image: Image) => {
+    setImages((prevImages) =>
+      prevImages.filter((item) => item.previewUrl !== image.previewUrl),
+    );
   };
 
   useEffect(() => {
@@ -44,6 +73,7 @@ export default function FeedEditorModal() {
   useEffect(() => {
     if (!isOpen) return;
     setContent("");
+    setImages([]);
   }, [isOpen]);
 
   return (
@@ -58,17 +88,49 @@ export default function FeedEditorModal() {
           ref={textareaRef}
           disabled={isFeedCreating}
         />
+        <input
+          type="file"
+          accept="image/*"
+          multiple
+          className="hidden"
+          ref={fileInputRef}
+          onChange={handleSelectImages}
+        />
+        {images.length > 0 && (
+          <figure className="flex h-[100px] touch-pan-x touch-auto gap-4 overflow-x-auto">
+            {images.map((image) => (
+              <div
+                key={image.previewUrl}
+                className="relative h-full shrink-0 basis-2/5"
+              >
+                <img
+                  src={image.previewUrl}
+                  className="size-full rounded-sm object-cover"
+                />
+                <div className="absolute top-0 right-0 m-1 cursor-pointer rounded-full bg-black/30 p-1">
+                  <XIcon
+                    className="size-2 text-white/70"
+                    onClick={() => handleDeleteImage(image)}
+                  />
+                </div>
+              </div>
+            ))}
+          </figure>
+        )}
         <Button
           variant="outline"
           className="cursor-pointer"
           disabled={isFeedCreating}
+          onClick={() => {
+            fileInputRef.current?.click();
+          }}
         >
           <ImageIcon />
           <p>이미지 추가</p>
         </Button>
         <Button
           className="cursor-pointer"
-          onClick={handlePostSave}
+          onClick={handleFeedSave}
           disabled={isFeedCreating}
         >
           저장
