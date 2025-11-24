@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
 import { Toaster } from "sonner";
 
-import ModalProvider from "@shared/provider/modal-provider.tsx";
+import Modals from "@shared/ui/common/modals/modal-provider.tsx";
 import AuthWatcher from "@features/auth/components/auth-watcher.tsx";
 
 import App from "./App.tsx";
@@ -25,10 +25,9 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools />
       <Toaster />
+      <Modals />
       <AuthWatcher>
-        <ModalProvider>
-          <App />
-        </ModalProvider>
+        <App />
       </AuthWatcher>
     </QueryClientProvider>
   </BrowserRouter>,

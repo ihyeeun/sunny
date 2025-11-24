@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import FeedEditorModal from "@features/feed/components/feed-editor-modal";
 
-export default function ModalProvider({ children }: { children: ReactNode }) {
+export default function Modals({ children }: { children?: ReactNode }) {
   return (
     <>
       {createPortal(
