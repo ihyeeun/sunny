@@ -1,6 +1,6 @@
 import { PlusCircle } from "lucide-react";
 
-import { useFeedEditorModalOpen } from "@shared/store/modals/feed-editor-modal";
+import { useFeedEditorModalOpen } from "@features/feed/store/feed-editor-modal";
 
 export default function CreateFeedButton() {
   const modalOpen = useFeedEditorModalOpen();
