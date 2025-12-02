@@ -2,11 +2,12 @@ import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { ImageIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { useFeedEditorModal } from "@shared/store/modals/feed-editor-modal";
+import { useOpenAlertModal } from "@shared/store/modals/alert-confirm-modal-store";
 import { useSessionState } from "@shared/store/session";
 import { Button, Dialog } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
 import { useFeedCreateMutation } from "@features/feed/hooks/mutations/use-feed-create-mutation";
+import { useFeedEditorModal } from "@features/feed/store/feed-editor-modal";
 
 interface Image {
   file: File;
@@ -15,6 +16,7 @@ interface Image {
 
 export default function FeedEditorModal() {
   const session = useSessionState();
+  const openAlertModal = useOpenAlertModal();
   const { isOpen, modalClose } = useFeedEditorModal();
   const { mutate: insertFeed, isPending: isFeedCreating } =
     useFeedCreateMutation({
@@ -36,6 +38,16 @@ export default function FeedEditorModal() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleModalClose = () => {
+    if (content !== "" || images.length !== 0) {
+      openAlertModal({
+        title: "피드 작성을 종료하시겠습니까?",
+        description: "작성 중인 내용이 사라집니다.",
+        onPositiveAction: () => {
+          modalClose();
+        },
+      });
+      return;
+    }
     modalClose();
   };
 
@@ -142,7 +154,7 @@ export default function FeedEditorModal() {
           onClick={handleFeedSave}
           disabled={isFeedCreating}
         >
-          저장
+          올리기
         </Button>
       </DialogContent>
     </Dialog>
