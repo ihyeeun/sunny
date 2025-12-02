@@ -81,6 +81,7 @@ export default function FeedEditorModal() {
     setImages((prevImages) =>
       prevImages.filter((item) => item.previewUrl !== image.previewUrl),
     );
+    URL.revokeObjectURL(image.previewUrl);
   };
 
   useEffect(() => {
@@ -92,7 +93,13 @@ export default function FeedEditorModal() {
   }, [content]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      images.forEach((image) => {
+        URL.revokeObjectURL(image.previewUrl);
+      });
+
+      return;
+    }
     setContent("");
     setImages([]);
   }, [isOpen]);
