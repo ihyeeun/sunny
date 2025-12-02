@@ -3,6 +3,7 @@ import { ImageIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { useFeedEditorModal } from "@shared/store/modals/feed-editor-modal";
+import { useSessionState } from "@shared/store/session";
 import { Button, Dialog } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
 import { useFeedCreateMutation } from "@features/feed/hooks/mutations/use-feed-create-mutation";
@@ -13,8 +14,9 @@ interface Image {
 }
 
 export default function FeedEditorModal() {
+  const session = useSessionState();
   const { isOpen, modalClose } = useFeedEditorModal();
-  const { mutate: feedCreate, isPending: isFeedCreating } =
+  const { mutate: insertFeed, isPending: isFeedCreating } =
     useFeedCreateMutation({
       onSuccess: () => {
         modalClose();
@@ -38,8 +40,15 @@ export default function FeedEditorModal() {
   };
 
   const handleFeedSave = () => {
-    if (content.trim() === "") return;
-    feedCreate(content);
+    if (content.trim() === "") {
+      toast.error("내용을 입력해주세요.", { position: "top-center" });
+      return;
+    }
+    insertFeed({
+      content,
+      images: images.map((img) => img.file),
+      userId: session!.user.id,
+    });
   };
 
   const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {

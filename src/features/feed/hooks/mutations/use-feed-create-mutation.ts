@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
 import type { UseMutationCallback } from "@shared/types/callbacks.types";
-import { postCreateFeed } from "@features/feed/api/post-create-feed";
+import { insertFeed } from "@features/feed/api/insert-create-feed";
 
 export function useFeedCreateMutation(callbacks?: UseMutationCallback) {
   return useMutation({
-    mutationFn: postCreateFeed,
+    mutationFn: insertFeed,
     onSuccess: () => {
       if (callbacks?.onSuccess) callbacks.onSuccess();
     },
