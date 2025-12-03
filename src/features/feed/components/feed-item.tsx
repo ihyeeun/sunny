@@ -2,6 +2,7 @@ import { Heart, MessageCircleMore } from "lucide-react";
 
 import { Button } from "@shared/ui/shadcn";
 import { formatTimeAgo } from "@shared/utils/time";
+import { DeleteFeed } from "@features/feed/components/delete-feed";
 import ModifyFeed from "@features/feed/components/modify-feed";
 import type { FeedItem } from "@features/feed/types/feed";
 
@@ -26,12 +27,7 @@ export function FeedItem(feed: FeedItem) {
         </div>
         <div className="flex items-start">
           <ModifyFeed {...feed} />
-          <Button
-            variant="ghost"
-            className="text-muted-foreground h-fit w-fit cursor-pointer p-2 py-1 text-[10px]"
-          >
-            삭제
-          </Button>
+          <DeleteFeed feedId={feed.id} />
         </div>
       </header>
 
