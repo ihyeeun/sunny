@@ -2,6 +2,7 @@ import { Heart, MessageCircleMore } from "lucide-react";
 
 import { Button } from "@shared/ui/shadcn";
 import { formatTimeAgo } from "@shared/utils/time";
+import ModifyFeed from "@features/feed/components/modify-feed";
 import type { FeedItem } from "@features/feed/types/feed";
 
 import defaultAvatar from "@/assets/default-avatar.png";
@@ -24,12 +25,7 @@ export function FeedItem(feed: FeedItem) {
           </div>
         </div>
         <div className="flex items-start">
-          <Button
-            variant="ghost"
-            className="text-muted-foreground h-fit w-fit cursor-pointer p-2 py-1 text-[10px]"
-          >
-            수정
-          </Button>
+          <ModifyFeed {...feed} />
           <Button
             variant="ghost"
             className="text-muted-foreground h-fit w-fit cursor-pointer p-2 py-1 text-[10px]"
