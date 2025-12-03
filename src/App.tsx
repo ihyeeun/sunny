@@ -11,7 +11,7 @@ import {
   SignInPage,
   SignUpPage,
 } from "@features/auth";
-import FeedDetailPage from "@features/feed/pages/feed-detail-page";
+import { FeedListPage } from "@features/feed";
 import { IndexPage } from "@features/home";
 import { ProfileDetailPage } from "@features/user";
 
@@ -35,7 +35,7 @@ function App() {
         </Route>
 
         <Route element={<MemberGuard />}>
-          <Route path={PATH.FEED.DETAIL_ROUTE} element={<FeedDetailPage />} />
+          <Route path={PATH.FEED.DETAIL_ROUTE} element={<FeedListPage />} />
           <Route
             path={PATH.PROFILE.DETAIL_ROUTE}
             element={<ProfileDetailPage />}
