@@ -38,16 +38,16 @@ export default function AlertConfirmModal() {
           <Button
             onClick={handleActionClick}
             className="w-[50%] cursor-pointer"
-            variant="outline"
+            variant="default"
           >
-            종료
+            확인
           </Button>
           <Button
             onClick={handleCancelClick}
             className="w-[50%] cursor-pointer"
-            variant="default"
+            variant="outline"
           >
-            취소
+            돌아가기
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
