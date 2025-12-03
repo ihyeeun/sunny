@@ -1,5 +1,6 @@
 import { Heart, MessageCircleMore } from "lucide-react";
 
+import { useSessionState } from "@shared/store/session";
 import { Button } from "@shared/ui/shadcn";
 import { formatTimeAgo } from "@shared/utils/time";
 import { DeleteFeed } from "@features/feed/components/delete-feed";
@@ -9,6 +10,8 @@ import type { FeedItem } from "@features/feed/types/feed";
 import defaultAvatar from "@/assets/default-avatar.png";
 
 export function FeedItem(feed: FeedItem) {
+  const session = useSessionState();
+  const isMine = session?.user.id === feed.author_id;
   return (
     <article className="flex flex-col gap-4 p-3">
       <header className="flex justify-between">
@@ -25,10 +28,12 @@ export function FeedItem(feed: FeedItem) {
             </p>
           </div>
         </div>
-        <div className="flex items-start">
-          <ModifyFeed {...feed} />
-          <DeleteFeed feedId={feed.id} />
-        </div>
+        {isMine && (
+          <div className="flex items-start">
+            <ModifyFeed {...feed} />
+            <DeleteFeed feedId={feed.id} />
+          </div>
+        )}
       </header>
 
       {feed.image_urls && (
