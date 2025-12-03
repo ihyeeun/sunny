@@ -39,7 +39,15 @@ export interface Database {
           image_urls?: string[] | null;
           like_cnt?: number;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "feed_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       profile: {
         Row: {
