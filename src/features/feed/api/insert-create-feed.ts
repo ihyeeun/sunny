@@ -1,5 +1,6 @@
 import supabase from "@shared/lib/supabase";
-import type { FeedEntity } from "@shared/types/database.types";
+import { deleteFeed } from "@features/feed/api/delete-feed";
+import { updateFeed } from "@features/feed/api/update-feed";
 import { BUCKET_UPLOAD_FEED_IMAGE } from "@features/feed/constants/storage";
 
 export async function insertCreateFeedOnlyContent(content: string) {
@@ -76,30 +77,4 @@ export async function uploadFeedImages({
 
   //현재 업로드한 이미지의 주소를 반환
   return publicUrl;
-}
-
-export async function updateFeed(feed: Partial<FeedEntity> & { id: number }) {
-  const { data, error } = await supabase
-    .from("feed")
-    .update(feed)
-    .eq("id", feed.id)
-    .select()
-    .single();
-
-  if (error) throw error;
-
-  return data;
-}
-
-export async function deleteFeed(feedId: number) {
-  const { data, error } = await supabase
-    .from("feed")
-    .delete()
-    .eq("id", feedId)
-    .select()
-    .single();
-
-  if (error) throw error;
-
-  return data;
 }
