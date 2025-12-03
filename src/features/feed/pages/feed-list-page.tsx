@@ -7,7 +7,7 @@ import { useInfinteFeedListQuery } from "@features/feed/hooks/queries/use-infint
 
 export default function FeedListPage() {
   const {
-    data: feedList,
+    data: feedsId,
     error,
     isPending,
     fetchNextPage,
@@ -27,10 +27,10 @@ export default function FeedListPage() {
 
   return (
     <ul className="flex flex-col gap-4">
-      {feedList.pages.map((page) =>
-        page.map((feed) => (
-          <li key={feed.id}>
-            <FeedItem {...feed} />
+      {feedsId.pages.map((page) =>
+        page.map((feedId) => (
+          <li key={feedId}>
+            <FeedItem feedId={feedId} />
             <div className="mt-4 h-0.5 w-full bg-gray-100" />
           </li>
         )),

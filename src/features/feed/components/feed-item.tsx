@@ -1,17 +1,26 @@
 import { Heart, MessageCircleMore } from "lucide-react";
 
 import { useSessionState } from "@shared/store/session";
+import { Fallback } from "@shared/ui/common";
 import { Button } from "@shared/ui/shadcn";
 import { formatTimeAgo } from "@shared/utils/time";
 import { DeleteFeed } from "@features/feed/components/delete-feed";
 import ModifyFeed from "@features/feed/components/modify-feed";
+import { useFeedByIdQuery } from "@features/feed/hooks/queries/use-feed-by-id-query";
 import type { FeedItem } from "@features/feed/types/feed";
 
 import defaultAvatar from "@/assets/default-avatar.png";
 
-export function FeedItem(feed: FeedItem) {
+export function FeedItem({ feedId }: { feedId: number }) {
   const session = useSessionState();
+  const { data: feed, error } = useFeedByIdQuery({
+    feedId,
+    feedType: "FEED",
+  });
+  if (error || !feed) return <Fallback />;
+
   const isMine = session?.user.id === feed.author_id;
+
   return (
     <article className="flex flex-col gap-4 p-3">
       <header className="flex justify-between">
