@@ -1,7 +1,7 @@
 import sunnyLogo from "@/assets/sunny-transparency.png";
 export default function GlobalLoaded() {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center border">
+    <div className="flex w-screen flex-col items-center justify-center">
       <img
         className="h-10 animate-spin"
         src={sunnyLogo}
