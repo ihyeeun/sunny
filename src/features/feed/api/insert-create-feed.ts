@@ -1,5 +1,5 @@
 import supabase from "@shared/lib/supabase";
-import type { PostEntity } from "@shared/types/database.types";
+import type { FeedEntity } from "@shared/types/database.types";
 import { BUCKET_UPLOAD_FEED_IMAGE } from "@features/feed/constants/storage";
 
 export async function insertCreateFeedOnlyContent(content: string) {
@@ -44,7 +44,7 @@ export async function insertFeed({
     );
 
     //3. 포스트 테이블
-    const updatedFeedImages = await updateFeedImages({
+    const updatedFeedImages = await updateFeed({
       id: feed.id,
       image_urls: imageUrls,
     });
@@ -78,9 +78,7 @@ export async function uploadFeedImages({
   return publicUrl;
 }
 
-export async function updateFeedImages(
-  feed: Partial<PostEntity> & { id: number },
-) {
+export async function updateFeed(feed: Partial<FeedEntity> & { id: number }) {
   const { data, error } = await supabase
     .from("feed")
     .update(feed)
