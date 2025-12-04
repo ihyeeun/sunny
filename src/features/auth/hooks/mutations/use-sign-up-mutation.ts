@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 
 import type { UseMutationCallback } from "@shared/types/callbacks.types";
-import { postSignUp } from "@features/auth/api/post-sign-up";
+import { signUp } from "@features/auth/api/sign-up";
 
 export function useSignUpMutation(callbacks?: UseMutationCallback) {
   return useMutation({
-    mutationFn: postSignUp,
+    mutationFn: signUp,
     onSuccess: () => {
       if (callbacks?.onSuccess) callbacks.onSuccess();
     },

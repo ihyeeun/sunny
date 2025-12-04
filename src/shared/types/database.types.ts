@@ -1,5 +1,5 @@
 import type { Database } from "@/raw-database.types";
 
-export type PostEntity = Database["public"]["Tables"]["post"]["Row"];
+export type FeedEntity = Database["public"]["Tables"]["feed"]["Row"];
 
 export type ProfileEntity = Database["public"]["Tables"]["profile"]["Row"];

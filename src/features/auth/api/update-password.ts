@@ -1,6 +1,6 @@
 import supabase from "@shared/lib/supabase";
 
-export async function putUpdatePassword(password: string) {
+export async function updatePassword(password: string) {
   const { data, error } = await supabase.auth.updateUser({
     password,
   });
