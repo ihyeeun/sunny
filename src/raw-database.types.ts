@@ -49,6 +49,35 @@ export interface Database {
           },
         ];
       };
+      feedLike: {
+        Row: {
+          created_at: string;
+          feed_id: number;
+          id: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          feed_id: number;
+          id?: number;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          feed_id?: number;
+          id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "feedLike_feed_id_fkey";
+            columns: ["feed_id"];
+            isOneToOne: false;
+            referencedRelation: "feed";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       profile: {
         Row: {
           avatar_image: string | null;
@@ -75,7 +104,12 @@ export interface Database {
       };
     };
     Views: Record<never, never>;
-    Functions: Record<never, never>;
+    Functions: {
+      toggle_feed_like: {
+        Args: { p_feed_id: number; p_user_id: string };
+        Returns: boolean;
+      };
+    };
     Enums: Record<never, never>;
     CompositeTypes: Record<never, never>;
   };
