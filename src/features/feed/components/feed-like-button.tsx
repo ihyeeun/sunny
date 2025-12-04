@@ -8,9 +8,11 @@ import useFeedLikeToggleMutation from "@features/feed/hooks/mutations/use-feed-l
 export default function FeedLikeButton({
   feedId,
   likeCount,
+  isFeedLiked,
 }: {
   feedId: number;
   likeCount: number;
+  isFeedLiked: boolean;
 }) {
   const session = useSessionState();
   const userId = session?.user.id;
@@ -39,7 +41,9 @@ export default function FeedLikeButton({
       size="icon"
       onClick={handleFeedLikeClick}
     >
-      <Heart className="size-4" />
+      <Heart
+        className={`size-4 ${isFeedLiked && "fill-foreground border-foreground"}`}
+      />
       <span className="text-xs">{likeCount}</span>
     </Button>
   );

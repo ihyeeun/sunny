@@ -15,7 +15,7 @@ export function useFeedDeleteMutation(callbacks?: UseMutationCallback) {
         await deleteImagesInPath(`${deleteFeed.author_id}/${deleteFeed.id}`);
       }
       queryClient.resetQueries({
-        queryKey: FEED_QUERY_KEYS.feed.list,
+        queryKey: FEED_QUERY_KEYS.feed.list(deleteFeed.author_id),
       });
     },
     onError: (error) => {

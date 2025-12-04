@@ -62,7 +62,11 @@ export function FeedItem({ feedId }: { feedId: number }) {
       <p className="line-clamp-2 text-sm whitespace-pre-wrap">{feed.content}</p>
 
       <footer className="flex flex-row gap-2">
-        <FeedLikeButton feedId={feed.id} likeCount={feed.like_cnt} />
+        <FeedLikeButton
+          feedId={feed.id}
+          likeCount={feed.like_cnt}
+          isFeedLiked={feed.isFeedLiked}
+        />
         <Button
           variant="ghost"
           className="h-fit w-fit cursor-pointer p-1"

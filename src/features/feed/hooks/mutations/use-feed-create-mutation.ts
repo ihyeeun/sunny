@@ -9,9 +9,11 @@ export function useFeedCreateMutation(callbacks?: UseMutationCallback) {
 
   return useMutation({
     mutationFn: insertFeed,
-    onSuccess: () => {
+    onSuccess: (insertFeed) => {
       if (callbacks?.onSuccess) callbacks.onSuccess();
-      queryClient.resetQueries({ queryKey: FEED_QUERY_KEYS.feed.list });
+      queryClient.resetQueries({
+        queryKey: FEED_QUERY_KEYS.feed.list(insertFeed.author_id),
+      });
     },
     onError: (error) => {
       if (callbacks?.onError) callbacks.onError(error);

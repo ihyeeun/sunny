@@ -14,7 +14,7 @@ export function useFeedUpdateMutation(callbacks?: UseMutationCallback) {
       if (callbacks?.onSuccess) callbacks.onSuccess();
 
       queryClient.setQueryData<FeedItem>(
-        FEED_QUERY_KEYS.feed.byId(updateFeed.id),
+        FEED_QUERY_KEYS.feed.byId(updateFeed.id, updateFeed.author_id),
         (prevFeed) => {
           if (!prevFeed)
             throw new Error(
