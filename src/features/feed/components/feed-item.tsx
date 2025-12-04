@@ -1,10 +1,11 @@
-import { Heart, MessageCircleMore } from "lucide-react";
+import { MessageCircleMore } from "lucide-react";
 
 import { useSessionState } from "@shared/store/session";
 import { Fallback } from "@shared/ui/common";
 import { Button } from "@shared/ui/shadcn";
 import { formatTimeAgo } from "@shared/utils/time";
 import { DeleteFeed } from "@features/feed/components/delete-feed";
+import FeedLikeButton from "@features/feed/components/feed-like-button";
 import ModifyFeed from "@features/feed/components/modify-feed";
 import { useFeedByIdQuery } from "@features/feed/hooks/queries/use-feed-by-id-query";
 import type { FeedItem } from "@features/feed/types/feed";
@@ -61,14 +62,7 @@ export function FeedItem({ feedId }: { feedId: number }) {
       <p className="line-clamp-2 text-sm whitespace-pre-wrap">{feed.content}</p>
 
       <footer className="flex flex-row gap-2">
-        <Button
-          variant="ghost"
-          className="h-fit w-fit cursor-pointer p-1"
-          size="icon"
-        >
-          <Heart className="size-4" />
-          {/* TODO heart count */}
-        </Button>
+        <FeedLikeButton feedId={feed.id} likeCount={feed.like_cnt} />
         <Button
           variant="ghost"
           className="h-fit w-fit cursor-pointer p-1"
