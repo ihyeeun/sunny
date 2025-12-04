@@ -10,7 +10,7 @@ export default function Modals({ children }: { children?: ReactNode }) {
       {createPortal(
         <>
           <AlertConfirmModal />
-          <FeedEditorModal />,
+          <FeedEditorModal />
         </>,
         document.getElementById("modal-root")!,
       )}
