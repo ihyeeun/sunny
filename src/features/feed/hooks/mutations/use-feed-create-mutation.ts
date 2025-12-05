@@ -14,8 +14,11 @@ export function useFeedCreateMutation(callbacks?: UseMutationCallback) {
     onSuccess: (insertFeed) => {
       if (callbacks?.onSuccess) callbacks.onSuccess();
 
+      queryClient.removeQueries({
+        queryKey: FEED_QUERY_KEYS.feed.details(session?.user.id ?? null),
+      });
       queryClient.resetQueries({
-        queryKey: FEED_QUERY_KEYS.feed.lists(session?.user.id ?? null),
+        queryKey: FEED_QUERY_KEYS.feed.listGroup(session?.user.id ?? null),
       });
     },
     onError: (error) => {

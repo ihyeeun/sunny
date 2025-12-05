@@ -3,7 +3,7 @@ export const FEED_QUERY_KEYS = {
     all: () => ["feed"] as const,
     viewer: (viewerId: string | null) =>
       [...FEED_QUERY_KEYS.feed.all(), viewerId ?? "guest"] as const,
-    lists: (viewerId: string | null) =>
+    listGroup: (viewerId: string | null) =>
       [...FEED_QUERY_KEYS.feed.viewer(viewerId), "lists"] as const,
     list: ({
       viewerId,
@@ -13,7 +13,7 @@ export const FEED_QUERY_KEYS = {
       authorId?: string | null;
     }) =>
       [
-        ...FEED_QUERY_KEYS.feed.lists(viewerId),
+        ...FEED_QUERY_KEYS.feed.listGroup(viewerId),
         authorId ?? "timeline",
       ] as const,
     details: (viewerId: string | null) =>

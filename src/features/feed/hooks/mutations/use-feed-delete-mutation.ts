@@ -16,15 +16,11 @@ export function useFeedDeleteMutation(callbacks?: UseMutationCallback) {
       if (deleteFeed.image_urls && deleteFeed.image_urls.length > 0) {
         await deleteImagesInPath(`${deleteFeed.author_id}/${deleteFeed.id}`);
       }
-      queryClient.resetQueries({
-        queryKey: FEED_QUERY_KEYS.feed.lists(session?.user.id ?? null),
-      });
       queryClient.removeQueries({
-        queryKey: FEED_QUERY_KEYS.feed.byId(
-          deleteFeed.id,
-          session?.user.id ?? null,
-        ),
-        exact: true,
+        queryKey: FEED_QUERY_KEYS.feed.details(session?.user.id ?? null),
+      });
+      queryClient.resetQueries({
+        queryKey: FEED_QUERY_KEYS.feed.listGroup(session?.user.id ?? null),
       });
     },
     onError: (error) => {
