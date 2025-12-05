@@ -1,5 +1,7 @@
 import { MessageCircleMore } from "lucide-react";
+import { Link } from "react-router";
 
+import { PATH } from "@shared/constants/path";
 import { useSessionState } from "@shared/store/session";
 import { Fallback } from "@shared/ui/common";
 import { Button } from "@shared/ui/shadcn";
@@ -26,13 +28,17 @@ export function FeedItem({ feedId }: { feedId: number }) {
     <article className="flex flex-col gap-4 p-3">
       <header className="flex justify-between">
         <div className="flex items-center gap-1.5">
-          <img
-            src={feed.author.avatar_image ?? defaultAvatar}
-            alt={`${feed.author.nickname}의 프로필 이미지`}
-            className="size-8 rounded-full border object-cover"
-          />
+          <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
+            <img
+              src={feed.author.avatar_image ?? defaultAvatar}
+              alt={`${feed.author.nickname}의 프로필 이미지`}
+              className="size-8 rounded-full border object-cover"
+            />
+          </Link>
           <div>
-            <p className="text-[12px]">{feed.author.nickname}</p>
+            <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
+              <p className="text-[12px]">{feed.author.nickname}</p>
+            </Link>
             <p className="text-muted-foreground text-caption">
               {formatTimeAgo(feed.created_at)}
             </p>
