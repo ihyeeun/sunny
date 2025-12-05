@@ -13,16 +13,18 @@ export default function useFeedLikeToggleMutation(
   return useMutation({
     mutationFn: updateFeedLikeToggle,
     onMutate: async ({ feedId, userId }) => {
+      const viewerId = userId ?? null;
       await queryClient.cancelQueries({
-        queryKey: FEED_QUERY_KEYS.feed.byId(feedId, userId),
+        queryKey: FEED_QUERY_KEYS.feed.byId(feedId, viewerId),
+        exact: true,
       });
 
       const backupFeed = queryClient.getQueryData<FeedItem>(
-        FEED_QUERY_KEYS.feed.byId(feedId, userId),
+        FEED_QUERY_KEYS.feed.byId(feedId, viewerId),
       );
 
       queryClient.setQueryData<FeedItem>(
-        FEED_QUERY_KEYS.feed.byId(feedId, userId),
+        FEED_QUERY_KEYS.feed.byId(feedId, viewerId),
         (feed) => {
           if (!feed) throw new Error("포스트가 존재하지 않습니다.");
           return {
@@ -41,7 +43,7 @@ export default function useFeedLikeToggleMutation(
     onError: (error, { feedId, userId }, context) => {
       if (context?.backupFeed) {
         queryClient.setQueryData(
-          FEED_QUERY_KEYS.feed.byId(feedId, userId),
+          FEED_QUERY_KEYS.feed.byId(feedId, userId ?? null),
           context.backupFeed,
         );
       }

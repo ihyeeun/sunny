@@ -5,14 +5,14 @@ import { Fallback, GlobalLoaded } from "@shared/ui/common";
 import { FeedItem } from "@features/feed/components/feed-item";
 import { useInfinteFeedListQuery } from "@features/feed/hooks/queries/use-infinte-feed-list-query";
 
-export default function FeedListPage() {
+export default function FeedListPage({ authorId }: { authorId?: string }) {
   const {
     data: feedsId,
     error,
     isPending,
     fetchNextPage,
     isFetchingNextPage,
-  } = useInfinteFeedListQuery();
+  } = useInfinteFeedListQuery(authorId);
   const { ref: loadMoreRef, inView } = useInView();
 
   useEffect(() => {

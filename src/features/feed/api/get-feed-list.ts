@@ -4,10 +4,12 @@ export async function getFeedList({
   from,
   to,
   userId,
+  authorId,
 }: {
   from: number;
   to: number;
   userId?: string;
+  authorId?: string;
 }) {
   const query = supabase
     .from("feed")
@@ -18,6 +20,7 @@ export async function getFeedList({
     .range(from, to);
 
   if (userId) query.eq("feedLike.user_id", userId);
+  if (authorId) query.eq("author_id", authorId);
 
   const { data, error } = await query;
   if (error) throw error;

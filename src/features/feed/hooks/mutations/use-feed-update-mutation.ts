@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+import { useSessionState } from "@shared/store/session";
 import type { UseMutationCallback } from "@shared/types/callbacks.types";
 import { updateFeed } from "@features/feed/api/update-feed";
 import { FEED_QUERY_KEYS } from "@features/feed/constants/query-key";
@@ -7,6 +8,7 @@ import { type FeedItem } from "@features/feed/types/feed";
 
 export function useFeedUpdateMutation(callbacks?: UseMutationCallback) {
   const queryClient = useQueryClient();
+  const session = useSessionState();
 
   return useMutation({
     mutationFn: updateFeed,
@@ -14,7 +16,7 @@ export function useFeedUpdateMutation(callbacks?: UseMutationCallback) {
       if (callbacks?.onSuccess) callbacks.onSuccess();
 
       queryClient.setQueryData<FeedItem>(
-        FEED_QUERY_KEYS.feed.byId(updateFeed.id, updateFeed.author_id),
+        FEED_QUERY_KEYS.feed.byId(updateFeed.id, session?.user?.id ?? null),
         (prevFeed) => {
           if (!prevFeed)
             throw new Error(
