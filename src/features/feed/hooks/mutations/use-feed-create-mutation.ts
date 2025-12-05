@@ -13,11 +13,9 @@ export function useFeedCreateMutation(callbacks?: UseMutationCallback) {
     mutationFn: insertFeed,
     onSuccess: (insertFeed) => {
       if (callbacks?.onSuccess) callbacks.onSuccess();
+
       queryClient.resetQueries({
-        queryKey: FEED_QUERY_KEYS.feed.list({
-          userId: session?.user.id ?? null,
-          authorId: insertFeed.author_id,
-        }),
+        queryKey: FEED_QUERY_KEYS.feed.lists(session?.user.id ?? null),
       });
     },
     onError: (error) => {

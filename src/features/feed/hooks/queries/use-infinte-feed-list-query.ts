@@ -10,10 +10,12 @@ export function useInfinteFeedListQuery(authorId?: string) {
   const queryClient = useQueryClient();
   const session = useSessionState();
 
+  const viewerId = session?.user.id ?? null;
+
   return useInfiniteQuery({
     queryKey: FEED_QUERY_KEYS.feed.list({
-      userId: session?.user.id ?? null,
-      authorId: authorId,
+      viewerId,
+      authorId: authorId ?? null,
     }),
     queryFn: async ({ pageParam }) => {
       const from = pageParam * PAGE_SIZE;
@@ -26,10 +28,7 @@ export function useInfinteFeedListQuery(authorId?: string) {
         authorId,
       });
       feeds.forEach((feed) => {
-        queryClient.setQueryData(
-          FEED_QUERY_KEYS.feed.byId(feed.id, session?.user.id ?? null),
-          feed,
-        );
+        queryClient.setQueryData(FEED_QUERY_KEYS.feed.byId(feed.id, viewerId), feed);
       });
 
       return feeds.map((feed) => feed.id);

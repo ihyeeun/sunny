@@ -17,10 +17,14 @@ export function useFeedDeleteMutation(callbacks?: UseMutationCallback) {
         await deleteImagesInPath(`${deleteFeed.author_id}/${deleteFeed.id}`);
       }
       queryClient.resetQueries({
-        queryKey: FEED_QUERY_KEYS.feed.list({
-          userId: session?.user.id ?? null,
-          authorId: deleteFeed.author_id,
-        }),
+        queryKey: FEED_QUERY_KEYS.feed.lists(session?.user.id ?? null),
+      });
+      queryClient.removeQueries({
+        queryKey: FEED_QUERY_KEYS.feed.byId(
+          deleteFeed.id,
+          session?.user.id ?? null,
+        ),
+        exact: true,
       });
     },
     onError: (error) => {
