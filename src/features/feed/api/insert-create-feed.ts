@@ -40,7 +40,7 @@ export async function insertFeed({
         const fileName = `${Date.now()}-${crypto.randomUUID()}.${fileExtenstion}`;
         const filePath = `${userId}/${feed.id}/${fileName}`;
 
-        return uploadFeedImages({ file: image, filePath });
+        return uploadImages({ file: image, filePath });
       }),
     );
 
@@ -58,7 +58,7 @@ export async function insertFeed({
   }
 }
 
-export async function uploadFeedImages({
+export async function uploadImages({
   file,
   filePath,
 }: {

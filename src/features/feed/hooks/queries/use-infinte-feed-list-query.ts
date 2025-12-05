@@ -13,7 +13,7 @@ export function useInfinteFeedListQuery(authorId?: string) {
   return useInfiniteQuery({
     queryKey: FEED_QUERY_KEYS.feed.list({
       userId: session?.user.id ?? null,
-      authorId,
+      authorId: authorId,
     }),
     queryFn: async ({ pageParam }) => {
       const from = pageParam * PAGE_SIZE;
