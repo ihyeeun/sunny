@@ -23,7 +23,7 @@ export async function updateProfile({ userId, updateData }: UpdateProfileDto) {
   if (updateData.avatarImageFile) {
     const fileExtenstion =
       updateData.avatarImageFile.name.split(".").pop() ?? "webp";
-    const filePath = `${PATH_PROFILE.DELETE_AVATAR_OF_USER(userId)}/${new Date().getTime}-${crypto.randomUUID()}.${fileExtenstion}`;
+    const filePath = `${PATH_PROFILE.DELETE_AVATAR_OF_USER(userId)}/${new Date().getTime()}-${crypto.randomUUID()}.${fileExtenstion}`;
 
     newAvatarImageUrl = await uploadImages({
       file: updateData.avatarImageFile,
@@ -37,7 +37,7 @@ export async function updateProfile({ userId, updateData }: UpdateProfileDto) {
     .update({
       nickname: updateData.nickname,
       bio: updateData.bio,
-      avatar_url: newAvatarImageUrl,
+      avatar_image: newAvatarImageUrl,
     })
     .eq("id", userId)
     .select()
