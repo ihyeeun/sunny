@@ -18,6 +18,7 @@ export async function deleteImagesInPath(path: string) {
   const { data: imageFiles, error: fetchImageFilesError } =
     await supabase.storage.from(BUCKET_UPLOAD_FEED_IMAGE).list(path);
 
+  if (!imageFiles || imageFiles.length === 0) return;
   if (fetchImageFilesError) throw fetchImageFilesError;
 
   const { error: removeError } = await supabase.storage
