@@ -1,6 +1,7 @@
 import { Navigate, useParams } from "react-router";
 
 import { PATH } from "@shared/constants/path";
+import { FeedComment } from "@features/feed/components/feed-detail/feed-comment";
 import { FeedItem } from "@features/feed/components/feed-item";
 import { FEED_ITEM_TYPE } from "@features/feed/constants/constant";
 
@@ -10,8 +11,9 @@ export default function FeedDetailPage() {
 
   if (!feedId) return <Navigate to={PATH.ROOT} />;
   return (
-    <>
+    <div className="flex flex-col gap-2">
       <FeedItem feedId={Number(feedId)} feedItemType={FEED_ITEM_TYPE.DETAIL} />
-    </>
+      <FeedComment />
+    </div>
   );
 }
