@@ -52,9 +52,9 @@ export function FeedItem({
             <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
               <p className="text-[12px]">{feed.author.nickname}</p>
             </Link>
-            <p className="text-muted-foreground text-caption">
+            <time className="text-muted-foreground text-caption block leading-none">
               {formatTimeAgo(feed.created_at)}
-            </p>
+            </time>
           </div>
         </div>
         {isMine && (
@@ -128,7 +128,6 @@ export function FeedItem({
             </Button>
           </Link>
         )}
-        {/* TODO commant layout */}
       </footer>
     </article>
   );
