@@ -9,7 +9,7 @@ export const PATH = {
   FEED: {
     ROOT: "/feed",
     DETAIL_ROUTE: "/feed/:feedId",
-    DETAIL_LINK: (feedId: string) => `/feed/${feedId}`,
+    DETAIL_LINK: (feedId: number) => `/feed/${feedId}`,
   },
   PROFILE: {
     ROOT: "/profile",
