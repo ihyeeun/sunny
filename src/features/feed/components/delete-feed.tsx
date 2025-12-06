@@ -1,10 +1,26 @@
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+
+import { PATH } from "@shared/constants/path";
 import { useOpenAlertModal } from "@shared/store/modals/alert-confirm-modal-store";
 import { Button } from "@shared/ui/shadcn";
 import { useFeedDeleteMutation } from "@features/feed/hooks/mutations/use-feed-delete-mutation";
 
 export function DeleteFeed({ feedId }: { feedId: number }) {
+  const navigate = useNavigate();
   const { mutate: FeedDelete, isPending: isDeleteFeedPending } =
-    useFeedDeleteMutation();
+    useFeedDeleteMutation({
+      onSuccess: () => {
+        const pathname = window.location.pathname;
+        if (pathname.startsWith(PATH.FEED.DETAIL_LINK(feedId))) {
+          navigate(PATH.ROOT, { replace: true });
+        }
+      },
+      onError: (error) => {
+        toast.error("포스트 삭제에 실패했습니다.", { position: "top-center" });
+        console.error("포스트 삭제 실패", error);
+      },
+    });
   const openAlertModal = useOpenAlertModal();
 
   const handleDeleteClick = () => {
