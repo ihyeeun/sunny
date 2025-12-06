@@ -1,9 +1,7 @@
 import { Navigate, Route, Routes } from "react-router";
 
 import { PATH } from "@shared/constants/path";
-import { GlobalLayout } from "@shared/ui/common";
-import GuestGuard from "@shared/ui/common/layout/guest-guard";
-import MemberGuard from "@shared/ui/common/layout/member-guard";
+import { GlobalLayout, GuestGuard, MemberGuard } from "@shared/ui/common";
 import {
   AuthLayout,
   ForgetPasswordPage,
