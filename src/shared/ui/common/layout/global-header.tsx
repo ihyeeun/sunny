@@ -1,4 +1,4 @@
-import { SunIcon, SunMoon } from "lucide-react";
+import { SunMoon } from "lucide-react";
 import { Link } from "react-router";
 
 import { PATH } from "@shared/constants/path";
