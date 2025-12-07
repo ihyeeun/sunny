@@ -18,7 +18,14 @@ interface EditMode {
   onClose: () => void;
 }
 
-type CommentMode = CreateMode | EditMode;
+interface ReflyMode {
+  mode: "REFLY";
+  feedId: number;
+  parentCommentId: number;
+  onClose: () => void;
+}
+
+type CommentMode = CreateMode | EditMode | ReflyMode;
 
 export function FeedCommentEditor(commentMode: CommentMode) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -27,6 +34,7 @@ export function FeedCommentEditor(commentMode: CommentMode) {
     useCommentCreateMutation({
       onSuccess: () => {
         setContent("");
+        if (commentMode.mode === "REFLY") commentMode.onClose();
       },
       onError: (error) => {
         toast.error("댓글 추가에 실패했습니다.", { position: "top-center" });
@@ -61,12 +69,18 @@ export function FeedCommentEditor(commentMode: CommentMode) {
 
     if (commentMode.mode === "CREATE")
       createComment({ feedId: commentMode.feedId, content });
-    else {
+    else if (commentMode.mode === "EDIT") {
       if (content === commentMode.initialContent) {
         toast.info("변경된 내용이 없습니다.", { position: "top-center" });
         commentMode.onClose();
       }
       updateComment({ commentId: commentMode.commentId, content });
+    } else {
+      createComment({
+        feedId: commentMode.feedId,
+        content,
+        parentCommentId: commentMode.parentCommentId,
+      });
     }
   };
 
@@ -100,6 +114,18 @@ export function FeedCommentEditor(commentMode: CommentMode) {
             disabled={isCreateCommentPending || isUpdateCommentPending}
           >
             수정 취소
+          </button>
+        </div>
+      )}
+
+      {commentMode.mode === "REFLY" && (
+        <div className="absolute -top-5 right-0 flex items-center">
+          <button
+            onClick={() => commentMode.onClose()}
+            className="text-caption text-muted-foreground/55 cursor-pointer underline"
+            disabled={isCreateCommentPending || isUpdateCommentPending}
+          >
+            답글 취소
           </button>
         </div>
       )}

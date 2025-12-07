@@ -15,3 +15,8 @@ export type FeedItem = FeedEntity & {
 export type FeedItemType = (typeof FEED_ITEM_TYPE)[keyof typeof FEED_ITEM_TYPE];
 
 export type Comment = CommentEntity & { author: FeedItemProfile };
+
+export type NestedComment = Comment & {
+  parentComment?: Comment;
+  childrenComment: NestedComment[];
+};
