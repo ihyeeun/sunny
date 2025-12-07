@@ -3,22 +3,27 @@ import { Ellipsis } from "lucide-react";
 
 import { Button, Popover } from "@shared/ui/shadcn";
 import { PopoverContent, PopoverTrigger } from "@shared/ui/shadcn/popover";
+import { formatTimeAgo } from "@shared/utils/time";
+import type { Comment } from "@features/feed/types/feed";
 
 import defaultAvatar from "@/assets/default-avatar.png";
 
-export function FeedCommentItem() {
+export function FeedCommentItem(comment: Comment) {
   return (
     <div className="flex flex-row gap-2">
       <figure>
-        <img src={defaultAvatar} className="size-8 rounded-full border" />
+        <img
+          src={defaultAvatar ?? comment.author.avatar_image}
+          className="size-8 rounded-full border"
+        />
       </figure>
 
       <div className="flex flex-1 flex-col">
         <div className="flex flex-row justify-between">
           <div className="flex-1">
-            <p className="text-sm font-semibold">USERNAME</p>
+            <p className="text-sm font-semibold">{comment.author.nickname}</p>
             <time className="text-caption text-muted-foreground block leading-none">
-              TIME
+              {formatTimeAgo(comment.created_at)}
             </time>
           </div>
 
@@ -49,7 +54,7 @@ export function FeedCommentItem() {
           </Popover>
         </div>
 
-        <div>content</div>
+        <div>{comment.content}</div>
         <div>
           <p className="text-muted-foreground text-caption cursor-pointer hover:underline">
             댓글 남기기
