@@ -42,7 +42,7 @@ export function FeedCommentItem(comment: Comment) {
     <div className="flex flex-row gap-2">
       <figure>
         <img
-          src={defaultAvatar ?? comment.author.avatar_image}
+          src={comment.author.avatar_image ?? defaultAvatar}
           className="size-8 rounded-full border"
         />
       </figure>
