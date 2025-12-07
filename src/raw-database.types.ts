@@ -14,6 +14,45 @@ export interface Database {
   };
   public: {
     Tables: {
+      comment: {
+        Row: {
+          author_id: string;
+          content: string;
+          created_at: string;
+          feed_id: number;
+          id: number;
+        };
+        Insert: {
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+          feed_id: number;
+          id?: number;
+        };
+        Update: {
+          author_id?: string;
+          content?: string;
+          created_at?: string;
+          feed_id?: number;
+          id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "comment_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "profile";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "comment_feed_id_fkey";
+            columns: ["feed_id"];
+            isOneToOne: false;
+            referencedRelation: "feed";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       feed: {
         Row: {
           author_id: string;
