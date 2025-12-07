@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { CircleArrowUp } from "lucide-react";
 import { toast } from "sonner";
 
@@ -22,6 +22,7 @@ interface ReflyMode {
   mode: "REFLY";
   feedId: number;
   parentCommentId: number;
+  rootCommentId: number;
   onClose: () => void;
 }
 
@@ -80,6 +81,7 @@ export function FeedCommentEditor(commentMode: CommentMode) {
         feedId: commentMode.feedId,
         content,
         parentCommentId: commentMode.parentCommentId,
+        rootCommentId: commentMode.rootCommentId,
       });
     }
   };

@@ -7,17 +7,24 @@ function toNestedCommentList(commentList: Comment[]): NestedComment[] {
   const result: NestedComment[] = [];
 
   commentList.forEach((comment) => {
-    if (!comment.parent_comment_id) {
+    if (!comment.root_comment_id) {
       result.push({ ...comment, childrenComment: [] });
     } else {
-      const parentCommentIndex = result.findIndex(
+      const rootCommentIndex = result.findIndex(
+        (item) => item.id === comment.root_comment_id,
+      );
+
+      const parentComment = commentList.find(
         (item) => item.id === comment.parent_comment_id,
       );
 
-      result[parentCommentIndex].childrenComment.push({
+      if (rootCommentIndex === -1) return;
+      if (!parentComment) return;
+
+      result[rootCommentIndex].childrenComment.push({
         ...comment,
         childrenComment: [],
-        parentComment: result[parentCommentIndex],
+        parentComment,
       });
     }
   });
@@ -38,7 +45,7 @@ export function FeedCommentList({ feedId }: { feedId: number }) {
   const nestedCommentList = toNestedCommentList(comment_list);
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-2">
       {nestedCommentList.map((comment) => (
         <FeedCommentItem key={comment.id} {...comment} />
       ))}

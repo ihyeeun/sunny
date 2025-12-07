@@ -22,6 +22,7 @@ export interface Database {
           feed_id: number;
           id: number;
           parent_comment_id: number | null;
+          root_comment_id: number | null;
         };
         Insert: {
           author_id?: string;
@@ -30,6 +31,7 @@ export interface Database {
           feed_id: number;
           id?: number;
           parent_comment_id?: number | null;
+          root_comment_id?: number | null;
         };
         Update: {
           author_id?: string;
@@ -38,6 +40,7 @@ export interface Database {
           feed_id?: number;
           id?: number;
           parent_comment_id?: number | null;
+          root_comment_id?: number | null;
         };
         Relationships: [
           {
@@ -57,6 +60,13 @@ export interface Database {
           {
             foreignKeyName: "comment_parent_comment_id_fkey";
             columns: ["parent_comment_id"];
+            isOneToOne: false;
+            referencedRelation: "comment";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "comment_root_comment_id_fkey";
+            columns: ["root_comment_id"];
             isOneToOne: false;
             referencedRelation: "comment";
             referencedColumns: ["id"];

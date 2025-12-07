@@ -43,8 +43,11 @@ export function FeedCommentItem(commentList: NestedComment) {
     });
   };
 
+  const isOverTwoLevels =
+    commentList.parent_comment_id !== commentList.root_comment_id;
+
   return (
-    <div>
+    <div className="py-1">
       <div className="flex flex-row gap-2">
         <figure>
           <img
@@ -110,7 +113,14 @@ export function FeedCommentItem(commentList: NestedComment) {
               onClose={toggleIsEditing}
             />
           ) : (
-            <p className="text-sm">{commentList.content}</p>
+            <p className="text-sm">
+              {isOverTwoLevels && (
+                <span className="text-blue-400">
+                  @{commentList.parentComment?.author.nickname}&nbsp;
+                </span>
+              )}
+              {commentList.content}
+            </p>
           )}
 
           <button
@@ -127,6 +137,7 @@ export function FeedCommentItem(commentList: NestedComment) {
               mode="REFLY"
               feedId={commentList.feed_id}
               parentCommentId={commentList.id}
+              rootCommentId={commentList.root_comment_id ?? commentList.id}
               onClose={toggleIsRefly}
             />
           )}

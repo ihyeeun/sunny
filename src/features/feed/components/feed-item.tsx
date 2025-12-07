@@ -38,7 +38,7 @@ export function FeedItem({
   const isMine = session?.user.id === feed.author_id;
 
   return (
-    <article className="flex flex-col gap-4 border p-3">
+    <article className="flex flex-col gap-4 p-3">
       <header className="flex justify-between">
         <div className="flex items-center gap-1.5">
           <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
