@@ -1,22 +1,41 @@
 import { useState } from "react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Ellipsis } from "lucide-react";
+import { toast } from "sonner";
 
+import { useOpenAlertModal } from "@shared/store/modals/alert-confirm-modal-store";
 import { useSessionState } from "@shared/store/session";
 import { Button, Popover } from "@shared/ui/shadcn";
 import { PopoverContent, PopoverTrigger } from "@shared/ui/shadcn/popover";
 import { formatTimeAgo } from "@shared/utils/time";
 import { FeedCommentEditor } from "@features/feed/components/feed-detail/feed-comment-editor";
+import { useCommentDeleteMutation } from "@features/feed/hooks/mutations/use-comment-delete-mutation";
 import type { Comment } from "@features/feed/types/feed";
 
 import defaultAvatar from "@/assets/default-avatar.png";
 
 export function FeedCommentItem(comment: Comment) {
   const session = useSessionState();
+  const openAlertModal = useOpenAlertModal();
   const [isEditing, setIsEditing] = useState(false);
+  const { mutate: deleteComment, isPending: isDeleteCommentPending } =
+    useCommentDeleteMutation({
+      onError: (error) => {
+        toast.error("댓글 삭제에 실패했습니다.", { position: "top-center" });
+        console.error("댓글 삭제 실패", error);
+      },
+    });
 
   const toggleIsEditing = () => {
     setIsEditing(!isEditing);
+  };
+
+  const handleDeleteComment = () => {
+    openAlertModal({
+      title: "댓글을 삭제하시겠습니까?",
+      description: "삭제한 댓글은 되돌릴 수 없습니다.",
+      onPositiveAction: () => deleteComment(comment.id),
+    });
   };
 
   return (
@@ -69,6 +88,7 @@ export function FeedCommentItem(comment: Comment) {
                 <PopoverClose
                   asChild
                   className="hover:bg-muted cursor-pointer px-4 py-2"
+                  onClick={handleDeleteComment}
                 >
                   <p className="flex items-center gap-2">삭제</p>
                 </PopoverClose>
