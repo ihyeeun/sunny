@@ -24,5 +24,6 @@ export function useProfileDataQuery(userId?: string) {
     },
     queryKey: PROFILE_QUERY_KEYS.profile.byId(userId!),
     enabled: !!userId,
+    staleTime: Infinity,
   });
 }

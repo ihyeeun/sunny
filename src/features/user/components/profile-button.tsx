@@ -1,20 +1,22 @@
 import { PopoverClose } from "@radix-ui/react-popover";
+import type { Session } from "@supabase/supabase-js";
 import { ChevronRight, DoorOpen, UserCog } from "lucide-react";
 import { Link } from "react-router";
 
 import { PATH } from "@shared/constants/path";
-import { useSessionState } from "@shared/store/session";
+import type { ProfileEntity } from "@shared/types/database.types";
 import { Popover } from "@shared/ui/shadcn";
 import { PopoverContent, PopoverTrigger } from "@shared/ui/shadcn/popover";
 import { signOut } from "@features/auth/api/sign-out";
-import { useProfileDataQuery } from "@features/user/hooks/queries/use-profile-data-query";
 
 import defaultAvatar from "@/assets/default-avatar.png";
 
-export function ProfileButton() {
-  const session = useSessionState();
-  const { data: profile } = useProfileDataQuery(session?.user.id);
+interface ProfileButtonProps {
+  session: Session | null;
+  profile: ProfileEntity | null;
+}
 
+export function ProfileButton({ session, profile }: ProfileButtonProps) {
   return (
     <div className="hover:bg-muted rounded-full">
       {session ? (

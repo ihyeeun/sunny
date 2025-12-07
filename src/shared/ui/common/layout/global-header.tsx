@@ -2,11 +2,16 @@ import { SunMoon } from "lucide-react";
 import { Link } from "react-router";
 
 import { PATH } from "@shared/constants/path";
+import { useSessionState } from "@shared/store/session";
 import { ProfileButton } from "@features/user";
+import { useProfileDataQuery } from "@features/user/hooks/queries/use-profile-data-query";
 
 import logo from "@/assets/sunny-transparency.png";
 
 export default function GlobalHeader() {
+  const session = useSessionState();
+  const { data: profile } = useProfileDataQuery(session?.user.id);
+
   return (
     <header className="h-10 border-b">
       <div className="layout-container flex h-full justify-between">
@@ -22,7 +27,7 @@ export default function GlobalHeader() {
           <div className="hover:bg-muted cursor-pointer rounded-full p-2">
             <SunMoon className="size-4" />
           </div>
-          <ProfileButton />
+          <ProfileButton session={session} profile={profile ?? null} />
         </div>
       </div>
     </header>
