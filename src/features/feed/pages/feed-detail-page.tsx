@@ -13,7 +13,7 @@ export default function FeedDetailPage() {
   return (
     <div className="flex flex-col gap-2">
       <FeedItem feedId={Number(feedId)} feedItemType={FEED_ITEM_TYPE.DETAIL} />
-      <FeedComment />
+      <FeedComment feedId={Number(feedId)} />
     </div>
   );
 }
