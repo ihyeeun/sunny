@@ -55,6 +55,11 @@ export default function SignInPage() {
     submitSignInWithOAuth("github");
   };
 
+  const handleTestAccountClick = () => {
+    setEmail("test@test.com");
+    setPassword("test123");
+  };
+
   const isSignInPending = isSignInWithPWPending || isSignInWithOAuthPending;
   return (
     <div className="auth-container">
@@ -95,6 +100,21 @@ export default function SignInPage() {
             </p>
           </Link>
         </div>
+
+        <button
+          className="flex cursor-pointer flex-col rounded-md border py-3 text-center text-sm"
+          onClick={handleTestAccountClick}
+        >
+          <p className="mb-1">
+            회원가입 없이 테스트 계정 사용하기 ! <br />
+            클릭하면 자동으로 값이 입력됩니다.
+          </p>
+
+          <div className="text-muted-foreground mx-auto inline-block text-left underline">
+            <p>이메일 : test@test.com</p>
+            <p>비밀번호 : test123</p>
+          </div>
+        </button>
 
         <div className="my-3 h-0.5 w-full bg-gray-100" />
 
