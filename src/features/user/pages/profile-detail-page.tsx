@@ -16,9 +16,9 @@ export default function ProfileDetailPage() {
   if (!userId) return <Navigate to={PATH.ROOT} replace />;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex w-full flex-col gap-8">
       <ProfileInfo userId={userId} />
-      <div className="h-1 w-full bg-black/10" />
+      <div className="h-0.5 w-full bg-gray-100" />
       <FeedListPage authorId={userId} />
     </div>
   );

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { MessageCircleMore } from "lucide-react";
 import { Link } from "react-router";
 
@@ -32,6 +33,18 @@ export function FeedItem({
     feedItemType: feedItemType,
   });
 
+  const contentRef = useRef<HTMLParagraphElement>(null);
+  const [isClamped, setIsClamped] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    if (el.scrollHeight > el.clientHeight) {
+      setIsClamped(true);
+    }
+  }, [feed?.content]);
+
   if (isFeedItemPending) return <GlobalLoaded />;
   if (error || !feed) return <Fallback />;
 
@@ -40,17 +53,19 @@ export function FeedItem({
   return (
     <article className="flex flex-col gap-4 p-3">
       <header className="flex justify-between">
-        <div className="flex items-center gap-1.5">
+        <div className="flex min-w-0 shrink items-center gap-1.5">
           <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
             <img
               src={feed.author.avatar_image ?? defaultAvatar}
               alt={`${feed.author.nickname}의 프로필 이미지`}
-              className="size-8 rounded-full border object-cover"
+              className="size-8 shrink-0 rounded-full object-cover"
             />
           </Link>
-          <div>
+          <div className="min-w-0 flex-1">
             <Link to={PATH.PROFILE.DETAIL_LINK(feed.author_id)}>
-              <p className="text-[12px]">{feed.author.nickname}</p>
+              <p className="line-clamp-1 truncate text-[12px]">
+                {feed.author.nickname}
+              </p>
             </Link>
             <time className="text-muted-foreground text-caption block leading-none">
               {formatTimeAgo(feed.created_at)}
@@ -83,9 +98,18 @@ export function FeedItem({
             </figure>
           )}
 
-          <p className="line-clamp-2 text-sm whitespace-pre-wrap">
+          <p
+            className="line-clamp-4 text-sm whitespace-pre-wrap"
+            ref={contentRef}
+          >
             {feed.content}
           </p>
+
+          {isClamped && (
+            <p className="text-muted-foreground text-end text-sm underline">
+              더보기
+            </p>
+          )}
         </Link>
       ) : (
         <div>
@@ -105,9 +129,7 @@ export function FeedItem({
             </figure>
           )}
 
-          <p className="line-clamp-2 text-sm whitespace-pre-wrap">
-            {feed.content}
-          </p>
+          <p className="text-sm whitespace-pre-wrap">{feed.content}</p>
         </div>
       )}
 

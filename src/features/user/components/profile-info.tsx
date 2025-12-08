@@ -23,16 +23,20 @@ export default function ProfileInfo({ userId }: { userId: string }) {
   const isMine = session?.user.id === userId;
 
   return (
-    <div className="flex flex-col items-center gap-2 rounded-lg border p-4 sm:flex-row sm:items-center">
+    <div className="flex w-full flex-col items-center gap-2 rounded-lg border p-4 sm:flex-row sm:items-center">
       <img
         src={profile.avatar_image ?? defaultAvartar}
-        className="size-20 rounded-full border object-cover sm:size-28"
+        className="size-20 rounded-full object-cover sm:size-28"
       />
-      <div className="flex flex-col border text-center sm:gap-1 sm:text-left">
-        <p className="text-sm font-semibold sm:text-base">{profile.nickname}</p>
-        <p className="text-muted-foreground text-[12px] sm:text-sm">
-          {profile.bio}
-        </p>
+      <div className="flex min-w-0 flex-1 flex-row items-center">
+        <div className="flex flex-1 flex-col text-center sm:gap-1 sm:text-left">
+          <p className="line-clamp-1 text-sm font-semibold sm:text-base">
+            {profile.nickname}
+          </p>
+          <p className="text-muted-foreground line-clamp-6 text-[12px] whitespace-pre-wrap sm:text-sm">
+            {profile.bio}
+          </p>
+        </div>
       </div>
       {isMine && (
         <>

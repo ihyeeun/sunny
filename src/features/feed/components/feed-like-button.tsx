@@ -44,7 +44,7 @@ export default function FeedLikeButton({
       <Heart
         className={`size-4 ${isFeedLiked && "fill-foreground border-foreground"}`}
       />
-      <span className="text-xs">{likeCount}</span>
+      {likeCount !== 0 && <span className="text-xs">{likeCount}</span>}
     </Button>
   );
 }

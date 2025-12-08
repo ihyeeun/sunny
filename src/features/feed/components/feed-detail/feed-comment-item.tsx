@@ -52,16 +52,14 @@ export function FeedCommentItem(commentList: NestedComment) {
         <figure>
           <img
             src={commentList.author.avatar_image ?? defaultAvatar}
-            className="size-8 rounded-full border"
+            className="size-8 rounded-full"
           />
         </figure>
 
         <div className="flex flex-1 flex-col gap-1">
           <div className="flex flex-row justify-between">
             <div className="flex-1">
-              <p className="text-[12px] font-semibold">
-                {commentList.author.nickname}
-              </p>
+              <p className="text-[12px]">{commentList.author.nickname}</p>
               <time className="text-caption text-muted-foreground block leading-none">
                 {formatTimeAgo(commentList.created_at)}
               </time>
