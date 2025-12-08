@@ -1,9 +1,7 @@
 import { Navigate, Route, Routes } from "react-router";
 
 import { PATH } from "@shared/constants/path";
-import { GlobalLayout } from "@shared/ui/common";
-import GuestGuard from "@shared/ui/common/layout/guest-guard";
-import MemberGuard from "@shared/ui/common/layout/member-guard";
+import { GlobalLayout, GuestGuard, MemberGuard } from "@shared/ui/common";
 import {
   AuthLayout,
   ForgetPasswordPage,
@@ -11,7 +9,7 @@ import {
   SignInPage,
   SignUpPage,
 } from "@features/auth";
-import { FeedListPage } from "@features/feed";
+import { FeedDetailPage } from "@features/feed";
 import { IndexPage } from "@features/home";
 import { ProfileDetailPage } from "@features/user";
 
@@ -35,7 +33,7 @@ function App() {
         </Route>
 
         <Route element={<MemberGuard />}>
-          <Route path={PATH.FEED.DETAIL_ROUTE} element={<FeedListPage />} />
+          <Route path={PATH.FEED.DETAIL_ROUTE} element={<FeedDetailPage />} />
           <Route
             path={PATH.PROFILE.DETAIL_ROUTE}
             element={<ProfileDetailPage />}

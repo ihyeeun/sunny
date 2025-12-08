@@ -2,7 +2,7 @@ import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import { ImageUp } from "lucide-react";
 import { toast } from "sonner";
 
-import { Button, Dialog, Input } from "@shared/ui/shadcn";
+import { Button, Dialog, Input, Textarea } from "@shared/ui/shadcn";
 import { DialogContent, DialogTitle } from "@shared/ui/shadcn/dialog";
 import { useProfileUpdateMutation } from "@features/user/hooks/mutations/use-profile-update-mutation";
 import { useProfileEditorModal } from "@features/user/store/profile-editor";
@@ -40,6 +40,7 @@ export function ProfileEditorModal() {
   const [nickname, setNickname] = useState(profile?.nickname);
   const [bio, setBio] = useState(profile?.bio);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (isOpen && profile) {
@@ -57,6 +58,14 @@ export function ProfileEditorModal() {
       if (avatarImage) URL.revokeObjectURL(avatarImage.previewUrl);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + "px";
+    }
+  }, [bio]);
 
   const handleSelectImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -85,7 +94,7 @@ export function ProfileEditorModal() {
     <Dialog open={isOpen} onOpenChange={modalClose}>
       <DialogContent>
         <DialogTitle className="text-center">프로필 수정</DialogTitle>
-        <div className="flex flex-col items-center justify-center gap-2 border py-5">
+        <div className="flex w-full flex-col items-center justify-center gap-2 rounded-sm border py-5">
           <div
             className="relative w-fit cursor-pointer"
             onClick={() => {
@@ -101,33 +110,48 @@ export function ProfileEditorModal() {
             />
             <img
               src={avatarImage?.previewUrl}
-              className="size-20 rounded-full border object-cover"
+              className="size-20 rounded-full object-cover"
             />
-            <div className="absolute right-0 bottom-0 size-fit rounded-full p-1">
+            <div className="absolute right-0 bottom-0 size-fit rounded-full">
               <ImageUp
-                strokeWidth={1}
-                className="text-muted-foreground/20 size-4 bg-white"
+                strokeWidth={0.5}
+                className="text-muted-foreground size-4"
               />
             </div>
           </div>
 
-          <div>
-            <p>닉네임</p>
-            <Input
-              value={nickname}
-              onChange={(e) => setNickname(e.target.value)}
-            />
-          </div>
-          <div>
-            <p>소개</p>
-            <Input value={bio} onChange={(e) => setBio(e.target.value)} />
+          <div className="flex w-full flex-col gap-2 px-3">
+            <div>
+              <div className="flex flex-row items-end justify-between">
+                <p>닉네임</p>
+                <p className="text-caption text-muted-foreground">
+                  {`${nickname?.length} / 35`}
+                </p>
+              </div>
+              <Input
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                maxLength={35}
+              />
+            </div>
+            <div>
+              <p>소개</p>
+              <Textarea
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                className="scrollbar-none max-h-30 resize-none"
+                placeholder="자기 소개"
+                ref={textareaRef}
+              />
+            </div>
           </div>
 
           <Button
             onClick={handleProfileUpdateButtonClick}
             disabled={updateProfileIsPending}
+            className="cursor-pointer"
           >
-            수정
+            프로필 수정
           </Button>
         </div>
       </DialogContent>

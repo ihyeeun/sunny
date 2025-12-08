@@ -21,4 +21,10 @@ export const FEED_QUERY_KEYS = {
     byId: (feedId: number, viewerId: string | null) =>
       [...FEED_QUERY_KEYS.feed.details(viewerId), feedId] as const,
   },
+
+  comment: {
+    all: ["comment"] as const,
+    comment_list: (feedId: number) =>
+      ["comment", "comment_list", feedId] as const,
+  },
 } as const;
