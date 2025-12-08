@@ -35,6 +35,7 @@ export default function SignUpPage() {
     <div className="auth-container">
       <h2 className="text-center font-semibold">SIGN UP</h2>
       <div className="flex flex-col gap-2">
+        <p className="text-caption">생성할 계정 아이디</p>
         <Input
           type="email"
           placeholder="example@abc.com"
@@ -42,6 +43,8 @@ export default function SignUpPage() {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isSignUpPending}
         />
+
+        <p className="text-caption">비밀번호</p>
         <Input
           type="password"
           placeholder="password"
@@ -52,14 +55,17 @@ export default function SignUpPage() {
       </div>
       <div className="flex flex-col gap-2">
         <Button
-          className="w-full"
+          className="w-full cursor-pointer"
           onClick={handleSignupClick}
           disabled={isSignUpPending}
         >
-          Create Account
+          계정 생성
         </Button>
+
+        <div className="my-3 h-0.5 w-full bg-gray-100" />
+
         <Link to={PATH.AUTH.SIGN_IN}>
-          <p className="text-muted-foreground hover:bg-accent rounded-sm text-center text-xs hover:underline">
+          <p className="text-muted-foreground rounded-sm text-center text-xs hover:underline">
             이미 계정이 있다면? 로그인 하러가기
           </p>
         </Link>

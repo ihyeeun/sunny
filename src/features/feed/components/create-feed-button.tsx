@@ -10,7 +10,7 @@ export default function CreateFeedButton() {
       <p className="text-muted-foreground text-sm">
         나누고 싶은 이야기가 있나요?
       </p>
-      <PlusCircle className="text-muted-foreground size-5" />
+      <PlusCircle className="text-muted-foreground size-5" strokeWidth={1} />
     </div>
   );
 }

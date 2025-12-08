@@ -34,14 +34,14 @@ export function ProfileButton({ session, profile }: ProfileButtonProps) {
                 to={PATH.PROFILE.DETAIL_LINK(session.user.id)}
                 className="flex items-center gap-2"
               >
-                <UserCog className="size-3" />
+                <UserCog className="size-3" strokeWidth={1} />
                 프로필
               </Link>
             </PopoverClose>
             <PopoverClose asChild className="hover:bg-muted px-4 py-2">
               <p className="flex items-center gap-2" onClick={signOut}>
                 <span>
-                  <DoorOpen className="size-3" />
+                  <DoorOpen className="size-3" strokeWidth={1} />
                 </span>
                 로그아웃
               </p>

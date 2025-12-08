@@ -211,7 +211,7 @@ export default function FeedEditorModal() {
               fileInputRef.current?.click();
             }}
           >
-            <ImageIcon />
+            <ImageIcon strokeWidth={1} />
             <p>이미지 추가</p>
           </Button>
         )}

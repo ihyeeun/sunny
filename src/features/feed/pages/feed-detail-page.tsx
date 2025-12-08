@@ -15,7 +15,7 @@ export default function FeedDetailPage() {
     <div className="flex flex-col gap-2">
       <FeedItem feedId={Number(feedId)} feedItemType={FEED_ITEM_TYPE.DETAIL} />
       <FeedComment feedId={Number(feedId)} />
-      <div className="sticky bottom-0 bg-white">
+      <div className="bg-background sticky bottom-0">
         <FeedCommentEditor mode="CREATE" feedId={Number(feedId)} />
       </div>
     </div>
