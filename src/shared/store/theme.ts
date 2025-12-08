@@ -8,7 +8,7 @@ interface State {
 }
 
 const initialState: State = {
-  theme: "light",
+  theme: "system",
 };
 
 const useThemeStore = create(
