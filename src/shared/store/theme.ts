@@ -42,7 +42,17 @@ const useThemeStore = create(
 
 export const useTheme = () => {
   const theme = useThemeStore((store) => store.theme);
+
+  if (theme === "system") {
+    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return isDark ? "dark" : "light";
+  }
+
   return theme;
+};
+
+export const useCurrentTheme = () => {
+  return useThemeStore((store) => store.theme);
 };
 
 export const useSetTheme = () => {

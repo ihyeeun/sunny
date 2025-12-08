@@ -3,16 +3,19 @@ import { Link } from "react-router";
 import { toast } from "sonner";
 
 import { PATH } from "@shared/constants/path";
+import { useTheme } from "@shared/store/theme";
 import { Button, Input } from "@shared/ui/shadcn";
 import { generateErrorMessage } from "@features/auth/constants/auth-error-message-kr";
 import { useSignInMutatioin } from "@features/auth/hooks/mutations/use-sign-in-mutation";
 import { useSignInWithOAuthMutation } from "@features/auth/hooks/mutations/use-sign-in-with-oauth-mutation";
 
-import githubLogo from "@/assets/github-mark.svg";
+import darkGithubLogo from "@/assets/github-mark.svg";
+import whiteGithubLogo from "@/assets/github-mark-white.svg";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const theme = useTheme();
 
   const { mutate: submitSignInWithPW, isPending: isSignInWithPWPending } =
     useSignInMutatioin({
@@ -72,33 +75,41 @@ export default function SignInPage() {
           disabled={isSignInPending}
         />
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-3">
         <Button
-          className="w-full"
+          className="w-full cursor-pointer"
           onClick={handleSignInClick}
           disabled={isSignInPending}
         >
-          Login
+          로그인
         </Button>
+        <div className="flex flex-row justify-evenly">
+          <Link to={PATH.AUTH.SIGN_UP}>
+            <p className="text-muted-foreground rounded-sm text-center text-xs hover:underline">
+              계정이 없다면? 회원가입 하러 가기
+            </p>
+          </Link>
+          <Link to={PATH.AUTH.FORGET_PASSWORD}>
+            <p className="text-muted-foreground rounded-sm text-center text-xs hover:underline">
+              비밀번호를 잊으셨나요?
+            </p>
+          </Link>
+        </div>
+
+        <div className="my-3 h-0.5 w-full bg-gray-100" />
+
+        <p className="text-center">간편 로그인</p>
         <Button
-          className="w-full"
-          variant={"outline"}
+          className="w-full cursor-pointer"
           onClick={handleSignInGithubClick}
           disabled={isSignInPending}
         >
-          <img src={githubLogo} className="h-5 w-5" />
+          <img
+            src={theme === "dark" ? darkGithubLogo : whiteGithubLogo}
+            className="h-5 w-5"
+          />
           Github 계정으로 로그인
         </Button>
-        <Link to={PATH.AUTH.SIGN_UP}>
-          <p className="text-muted-foreground hover:bg-accent rounded-sm text-center text-xs hover:underline">
-            계정이 없다면? 회원가입 하러 가기
-          </p>
-        </Link>
-        <Link to={PATH.AUTH.FORGET_PASSWORD}>
-          <p className="text-muted-foreground hover:bg-accent rounded-sm text-center text-xs hover:underline">
-            비밀번호를 잊으셨나요?
-          </p>
-        </Link>
       </div>
     </div>
   );

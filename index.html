@@ -2,25 +2,44 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image" href="/sunny.png" />
+    <link
+      id="dynamic-favicon"
+      rel="icon"
+      type="image/png"
+      href="/src/assets/sunny-transparency.png"
+    />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SUNNY</title>
     <script>
       try {
-        const themeStore = localStorage.getItem("ThemeStore")
-          ? JSON.parse(localStorage.getItem("ThemeStore"))
-          : null;
-        const theme = themeStore.state.theme;
+        const themeStoreRaw = localStorage.getItem("ThemeStore");
+        const themeStore = themeStoreRaw ? JSON.parse(themeStoreRaw) : null;
+        const theme = themeStore?.state?.theme;
 
         const htmlTag = document.documentElement;
-        htmlTag.classList.remove("dark", "light");
+        htmlTag.classList.remove("light", "dark");
+
+        function updateFavicon(isDark) {
+          const favicon = document.getElementById("dynamic-favicon");
+          favicon.href = isDark
+            ? "/src/assets/sunny-yellow-transparency.png"
+            : "/src/assets/sunny-transparency.png";
+        }
 
         if (theme === "system") {
-          const isDarkTheme = window.matchMedia(
-            "(prefers-color-scheme: dark)",
-          ).matches;
+          const media = window.matchMedia("(prefers-color-scheme: dark)");
+          const isDark = media.matches;
 
-          htmlTag.classList.add(isDarkTheme ? "dark" : "light");
+          htmlTag.classList.add(isDark ? "dark" : "light");
+          updateFavicon(isDark);
+
+          media.addEventListener("change", (e) => {
+            const darkNow = e.matches;
+            htmlTag.classList.remove("light", "dark");
+            htmlTag.classList.add(darkNow ? "dark" : "light");
+            updateFavicon(darkNow);
+          });
         } else {
           htmlTag.classList.add(theme);
         }
