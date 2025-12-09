@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Ellipsis } from "lucide-react";
+import { Link } from "react-router";
 import { toast } from "sonner";
 
+import { PATH } from "@shared/constants/path";
 import { useOpenAlertModal } from "@shared/store/modals/alert-confirm-modal-store";
 import { useSessionState } from "@shared/store/session";
 import { Button, Popover } from "@shared/ui/shadcn";
@@ -50,16 +52,27 @@ export function FeedCommentItem(commentList: NestedComment) {
     <div className="py-1">
       <div className="flex flex-row gap-2">
         <figure>
-          <img
-            src={commentList.author.avatar_image ?? defaultAvatar}
-            className="size-8 rounded-full"
-          />
+          <Link
+            to={PATH.PROFILE.DETAIL_LINK(commentList.author_id)}
+            aria-label={`${commentList.author.nickname}님의 프로필로 이동`}
+          >
+            <img
+              src={commentList.author.avatar_image ?? defaultAvatar}
+              className="size-8 rounded-full"
+              alt={`${commentList.author.nickname}님의 프로필 이미지`}
+            />
+          </Link>
         </figure>
 
         <div className="flex flex-1 flex-col gap-1">
           <div className="flex flex-row justify-between">
             <div className="flex-1">
-              <p className="text-[12px]">{commentList.author.nickname}</p>
+              <Link
+                to={PATH.PROFILE.DETAIL_LINK(commentList.author_id)}
+                aria-label={`${commentList.author.nickname}님의 프로필로 이동`}
+              >
+                <p className="text-[12px]">{commentList.author.nickname}</p>
+              </Link>
               <time className="text-caption text-muted-foreground block leading-none">
                 {formatTimeAgo(commentList.created_at)}
               </time>

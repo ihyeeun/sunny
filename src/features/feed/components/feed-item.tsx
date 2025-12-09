@@ -67,7 +67,7 @@ export function FeedItem({
           >
             <img
               src={feed.author.avatar_image ?? defaultAvatar}
-              alt={`${feed.author.nickname}의 프로필 이미지`}
+              alt={`${feed.author.nickname}님의 프로필 이미지`}
               className="size-8 shrink-0 rounded-full object-cover"
             />
           </Link>
@@ -97,18 +97,31 @@ export function FeedItem({
         <Link to={PATH.FEED.DETAIL_LINK(feed.id)}>
           {feed.image_urls && (
             <figure className="scrollbar-none flex touch-pan-x touch-auto gap-2 overflow-x-scroll">
-              {feed.image_urls.map((url, index) => (
-                <div
-                  key={index}
-                  className="aspect-square max-h-[180px] max-w-[180px] shrink-0 basis-2/5"
-                >
-                  <img
-                    src={url}
-                    className="size-full rounded-sm object-cover"
-                    alt={`게시글 이미지 ${index + 1}`}
-                  />
-                </div>
-              ))}
+              {feed.image_urls.map((url, index) => {
+                const length = feed.image_urls!.length;
+
+                const basisClass =
+                  length === 1
+                    ? "basis-full"
+                    : length === 2
+                      ? "basis-1/2"
+                      : length === 3
+                        ? "basis-2/5"
+                        : "basis-3/5";
+
+                return (
+                  <div
+                    key={index}
+                    className={`aspect-square shrink-0 ${basisClass}`}
+                  >
+                    <img
+                      src={url}
+                      className="size-full rounded-sm object-cover"
+                      alt={`게시글 이미지 ${index + 1}`}
+                    />
+                  </div>
+                );
+              })}
             </figure>
           )}
 
@@ -132,18 +145,28 @@ export function FeedItem({
         <div>
           {feed.image_urls && (
             <figure className="scrollbar-none flex touch-pan-x touch-auto gap-2 overflow-x-scroll">
-              {feed.image_urls.map((url, index) => (
-                <div
-                  key={index}
-                  className="aspect-square max-h-[180px] max-w-[180px] shrink-0 basis-2/5"
-                >
-                  <img
-                    src={url}
-                    className="size-full rounded-sm object-cover"
-                    alt={`게시글 이미지 ${index + 1}`}
-                  />
-                </div>
-              ))}
+              {feed.image_urls.map((url, index) => {
+                const length = feed.image_urls!.length;
+
+                const basisClass =
+                  length === 1
+                    ? "basis-full"
+                    : length === 2
+                      ? "basis-1/2"
+                      : length === 3
+                        ? "basis-2/3"
+                        : "basis-2/4";
+
+                return (
+                  <div key={index} className={`shrink-0 ${basisClass}`}>
+                    <img
+                      src={url}
+                      className="size-auto rounded-sm object-cover"
+                      alt={`게시글 이미지 ${index + 1}`}
+                    />
+                  </div>
+                );
+              })}
             </figure>
           )}
 
