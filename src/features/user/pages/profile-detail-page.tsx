@@ -16,7 +16,7 @@ export default function ProfileDetailPage() {
   if (!userId) return <Navigate to={PATH.ROOT} replace />;
 
   return (
-    <div className="flex w-full flex-col gap-8">
+    <div className="flex w-full flex-col gap-3">
       <h2 className="visuallyhidden">User Profile</h2>
       <ProfileInfo userId={userId} />
 

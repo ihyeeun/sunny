@@ -8,7 +8,7 @@ export default function GlobalLayout() {
     <div className="flex min-h-screen flex-col">
       <h1 className="visuallyhidden">Sunny</h1>
       <GlobalHeader />
-      <main className="layout-container flex-1 border-x py-6">
+      <main className="layout-container flex-1 border-x py-3">
         <Outlet />
       </main>
       <GlobalFooter />
