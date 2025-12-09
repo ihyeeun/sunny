@@ -12,7 +12,7 @@ export function useFeedDeleteMutation(callbacks?: UseMutationCallback) {
   return useMutation({
     mutationFn: deleteFeed,
     onSuccess: async (deleteFeed) => {
-      if (callbacks?.onSuccess) return callbacks.onSuccess();
+      if (callbacks?.onSuccess) callbacks.onSuccess();
       if (deleteFeed.image_urls && deleteFeed.image_urls.length > 0) {
         await deleteImagesInPath(`${deleteFeed.author_id}/${deleteFeed.id}`);
       }

@@ -23,7 +23,7 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
+      {import.meta.env.MODE === "development" && <ReactQueryDevtools />}
       <Toaster />
       <Modals />
       <AuthWatcher>

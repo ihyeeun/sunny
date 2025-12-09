@@ -7,6 +7,7 @@ export default function IndexPage() {
   return (
     <div className="flex flex-col gap-4">
       {loginState && <CreateFeedButton />}
+      <h2 className="visuallyhidden">Feed List</h2>
       <FeedListPage />
     </div>
   );

@@ -25,11 +25,11 @@ function App() {
           <Route element={<AuthLayout />}>
             <Route path={PATH.AUTH.SIGN_IN} element={<SignInPage />} />
             <Route path={PATH.AUTH.SIGN_UP} element={<SignUpPage />} />
+            <Route
+              path={PATH.AUTH.FORGET_PASSWORD}
+              element={<ForgetPasswordPage />}
+            />
           </Route>
-          <Route
-            path={PATH.AUTH.FORGET_PASSWORD}
-            element={<ForgetPasswordPage />}
-          />
         </Route>
 
         <Route element={<MemberGuard />}>
@@ -38,10 +38,12 @@ function App() {
             path={PATH.PROFILE.DETAIL_ROUTE}
             element={<ProfileDetailPage />}
           />
-          <Route
-            path={PATH.AUTH.RESET_PASSWORD}
-            element={<ResetPasswordPage />}
-          />
+          <Route element={<AuthLayout />}>
+            <Route
+              path={PATH.AUTH.RESET_PASSWORD}
+              element={<ResetPasswordPage />}
+            />
+          </Route>
         </Route>
 
         {/* 위에 설정한 경로가 아닌 예외 경로로 요청이 오면 root 페이지로 이동 */}
