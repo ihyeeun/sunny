@@ -34,7 +34,13 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <form className="auth-container">
+    <form
+      className="auth-container"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmitPassword();
+      }}
+    >
       <div>
         <h2 className="text-xl font-bold">비밀번호 재설정하기</h2>
         <p className="text-muted-foreground text-sm">
@@ -55,12 +61,7 @@ export default function ResetPasswordPage() {
         placeholder="새 비밀번호"
         disabled={isPending}
       />
-      <Button
-        type="submit"
-        onClick={handleSubmitPassword}
-        disabled={isPending}
-        className="cursor-pointer"
-      >
+      <Button type="submit" disabled={isPending} className="cursor-pointer">
         {isPending ? "변경 중..." : "비밀번호 변경하기"}
       </Button>
     </form>
