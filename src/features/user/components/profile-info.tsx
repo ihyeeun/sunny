@@ -27,6 +27,7 @@ export default function ProfileInfo({ userId }: { userId: string }) {
       <img
         src={profile.avatar_image ?? defaultAvartar}
         className="size-20 rounded-full object-cover sm:size-28"
+        alt={`${profile.nickname}님의 프로필 이미지`}
       />
       <div className="flex min-w-0 flex-1 flex-row items-center">
         <div className="flex flex-1 flex-col text-center sm:gap-1 sm:text-left">
@@ -34,7 +35,7 @@ export default function ProfileInfo({ userId }: { userId: string }) {
             {profile.nickname}
           </p>
           <p className="text-muted-foreground line-clamp-6 text-[12px] whitespace-pre-wrap sm:text-sm">
-            {profile.bio}
+            {profile.bio || "소개를 적어주세요."}
           </p>
         </div>
       </div>

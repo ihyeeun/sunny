@@ -40,6 +40,7 @@ export default function FeedLikeButton({
       className="h-fit w-fit cursor-pointer p-1"
       size="icon"
       onClick={handleFeedLikeClick}
+      aria-label={isFeedLiked ? "좋아요 취소하기" : "좋아요 누르기"}
     >
       <Heart
         className={`size-4 ${isFeedLiked && "fill-foreground border-foreground"}`}

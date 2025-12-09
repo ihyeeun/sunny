@@ -17,9 +17,17 @@ export default function ProfileDetailPage() {
 
   return (
     <div className="flex w-full flex-col gap-8">
+      <h2 className="visuallyhidden">User Profile</h2>
       <ProfileInfo userId={userId} />
+
       <div className="h-0.5 w-full bg-gray-100" />
-      <FeedListPage authorId={userId} />
+
+      <section aria-labelledby="user-feed-heading">
+        <h2 id="user-feed-heading" className="visuallyhidden">
+          User Posts
+        </h2>
+        <FeedListPage authorId={userId} />
+      </section>
     </div>
   );
 }
