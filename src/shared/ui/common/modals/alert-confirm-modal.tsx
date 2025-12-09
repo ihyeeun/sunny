@@ -24,7 +24,12 @@ export default function AlertConfirmModal() {
   };
 
   return (
-    <AlertDialog open={alertModal.isOpen}>
+    <AlertDialog
+      open={alertModal.isOpen}
+      onOpenChange={(open) => {
+        if (!open) alertModal.actions.modalClose();
+      }}
+    >
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center">

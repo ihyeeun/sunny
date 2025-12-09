@@ -15,7 +15,7 @@ export default function ResetPasswordPage() {
       toast.success("비밀번호 변경에 성공했습니다.", {
         position: "top-center",
       });
-      navigate(PATH.ROOT);
+      navigate(PATH.AUTH.SIGN_IN);
     },
     onError: (error) => {
       const errorMsg = generateErrorMessage(error);
@@ -25,29 +25,45 @@ export default function ResetPasswordPage() {
   });
 
   const handleSubmitPassword = () => {
-    if (password.trim() === "") return;
+    if (password.trim() === "")
+      return toast.warning("비밀번호를 입력해주세요", {
+        position: "top-center",
+      });
 
     updatePw(password);
   };
 
   return (
-    <div className="auth-container">
+    <form
+      className="auth-container"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmitPassword();
+      }}
+    >
       <div>
         <h2 className="text-xl font-bold">비밀번호 재설정하기</h2>
         <p className="text-muted-foreground text-sm">
           새로운 비밀번호를 입력해주세요.
         </p>
       </div>
+
+      <label htmlFor="password" className="visuallyhidden">
+        새 비밀번호 입력
+      </label>
+
       <Input
+        id="password"
+        type="password"
+        autoComplete="new-password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        type="password"
-        placeholder="password"
+        placeholder="새 비밀번호"
         disabled={isPending}
       />
-      <Button onClick={handleSubmitPassword} disabled={isPending}>
-        위 비밀번호로 변경하기
+      <Button type="submit" disabled={isPending} className="cursor-pointer">
+        {isPending ? "변경 중..." : "비밀번호 변경하기"}
       </Button>
-    </div>
+    </form>
   );
 }
