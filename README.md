@@ -1,12 +1,14 @@
 <div align="center">
 
-## SUNNY
+# SUNNY
 
 SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
 **피드 작성, 중첩 댓글, 좋아요, 프로필 관리, 무한 스크롤** 등 핵심 소셜 기능을 설계하고 개발한 프로젝트입니다. <br/>
 **인증, 이미지 업로드, 캐싱 최적화** 등 실무 수준의 구조를 경험하기 위해 제작했습니다.
 
 <a href="https://sunny-sns.vercel.app">sunny-sns.vercel.app</a>
+
+<br/>
 
 ## 기술스택
 
@@ -70,7 +72,7 @@ src/
 └── main.tsx                      # 진입점
 ```
 
-## 주의사항
+### 주의사항
 
 - `shared/`에서 `features/` import 금지<br/>
 - `shared/utils`에서는 `shared/lib` import 금지 (순수성 보장)<br/>
@@ -97,6 +99,8 @@ export { default as TodoDetailPage } from "./pages/TodoDetailPage";
 
 </details>
 
+<br/>
+
 <div align="center">
 
 ## 기능별 구현 방식
@@ -110,6 +114,8 @@ export { default as TodoDetailPage } from "./pages/TodoDetailPage";
 | **게시물 좋아요**  | 좋아요 정보는 별도 Like 테이블에서 관리하고 Feed 테이블과 JOIN하여 조회. <br/>UI는 **낙관적 업데이트**로 즉시 반영하고,<br/>서버는 트랜잭션 + **행 잠금(FOR UPDATE)** 기반으로 동시성 문제를 제어해 like_count 일관성을 유지.|
 | **무한 중첩 댓글** | Comments 테이블에서 댓글 구조를 관리. <br/>- 일반 댓글: `parent_id = null`<br/>- 1단계 답글: `parent_id`로 상위 댓글 참조<br/>- 2단계 이상 답글: `root_id`로 최상위 댓글을 추적하고 `parent_id`로 계층 관계 유지 → **트리 구조 형태로 무한 중첩 가능**|
 | **다크 모드** | 라이트/다크 모드 외에 **OS 시스템 테마를 자동으로 감지**해 UI에 반영하도록 구현.|
+
+<br/>
 
 ## 기능 이미지
 
@@ -125,11 +131,15 @@ Profile
 
 |내 프로필|다른 유저 프로필|프로필 수정|
 
+<br/>
+
 ## 페이지 흐름 및 데이터 구조
 
 |페이지 구조도|DB 테이블|
 |--|--|
 |<img width="1024" alt="페이지 구조도" src="https://github.com/user-attachments/assets/dc28133b-3313-42d6-bee3-2bf8124dfc26" />|<img width="1024" height="1412" alt="sunny-db" src="https://github.com/user-attachments/assets/8f993432-ca86-43e5-bcca-4a87088407dd" />|
+
+<br/>
 
 
 ## 문제해결 및 해결방안
