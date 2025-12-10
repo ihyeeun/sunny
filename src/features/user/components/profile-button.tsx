@@ -1,5 +1,6 @@
 import { PopoverClose } from "@radix-ui/react-popover";
 import type { Session } from "@supabase/supabase-js";
+import { useQueryClient } from "@tanstack/react-query";
 import { ChevronRight, DoorOpen, UserCog } from "lucide-react";
 import { Link } from "react-router";
 
@@ -8,6 +9,7 @@ import type { ProfileEntity } from "@shared/types/database.types";
 import { Popover } from "@shared/ui/shadcn";
 import { PopoverContent, PopoverTrigger } from "@shared/ui/shadcn/popover";
 import { signOut } from "@features/auth/api/sign-out";
+import { FEED_QUERY_KEYS } from "@features/feed/constants/query-key";
 
 import defaultAvatar from "@/assets/default-avatar.png";
 
@@ -17,6 +19,13 @@ interface ProfileButtonProps {
 }
 
 export function ProfileButton({ session, profile }: ProfileButtonProps) {
+  const queryClient = useQueryClient();
+
+  const handleSignOut = () => {
+    signOut();
+    queryClient.removeQueries({ queryKey: FEED_QUERY_KEYS.feed.all() });
+  };
+
   return (
     <div className="hover:bg-muted rounded-full">
       {session ? (
@@ -51,7 +60,7 @@ export function ProfileButton({ session, profile }: ProfileButtonProps) {
             <PopoverClose asChild className="hover:bg-muted px-4 py-2">
               <button
                 className="flex cursor-pointer items-center gap-2"
-                onClick={signOut}
+                onClick={handleSignOut}
               >
                 <span>
                   <DoorOpen
