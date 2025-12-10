@@ -7,7 +7,7 @@ export default function CreateFeedButton() {
   const modalOpen = useOpenFeedEditorModal();
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-50 border">
+    <div className="pointer-events-none fixed inset-x-0 bottom-6 z-50">
       <div className="layout-container flex justify-end">
         <Button
           size="default"
