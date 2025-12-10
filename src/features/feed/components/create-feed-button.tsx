@@ -14,7 +14,7 @@ export default function CreateFeedButton() {
           onClick={modalOpen}
           className="pointer-events-auto cursor-pointer rounded-4xl shadow-lg"
         >
-          <Plus />
+          <Plus aria-hidden="true" />
           글쓰기
         </Button>
       </div>
