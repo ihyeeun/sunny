@@ -9,10 +9,16 @@ export default function AuthWatcher({ children }: { children: ReactNode }) {
   const hasSessionLoaded = useSessionLoadedState();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
-      setSession(session);
-    });
-  });
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      },
+    );
+
+    return () => {
+      subscription.subscription?.unsubscribe();
+    };
+  }, []);
 
   if (!hasSessionLoaded) return <GlobalLoaded />;
 
