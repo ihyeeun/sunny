@@ -3,7 +3,7 @@
 # SUNNY
 
 SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
-**피드 작성, 중첩 댓글, 좋아요, 프로필 관리, 무한 스크롤** 등 핵심 소셜 기능을 설계하고 개발한 프로젝트입니다. <br/>
+**피드 작성, 중첩 댓글, 좋아요, 프로필 관리, 무한 스크롤** 등 핵심 소셜 기능을 설계하고 개발한 개인 프로젝트입니다. <br/>
 **인증, 이미지 업로드, 캐싱 최적화** 등 실무 수준의 구조를 경험하기 위해 제작했습니다.
 
 <a href="https://sunny-sns.vercel.app">sunny-sns.vercel.app</a>
@@ -28,8 +28,8 @@ SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
 ### Backend
 
 | 기술                                                                                            | 선정이유                                                                  |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| <img src="https://img.shields.io/badge/Supabase-2.77.0-3ECF8E?logo=supabase&logoColor=white" /> | Auth, Database(PostgreSQL), Storage · RLS 보안까지 제공하는 올인원 백엔드 |
+| :----------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------- |
+| <img src="https://img.shields.io/badge/Supabase-2.77.0-3ECF8E?logo=supabase&logoColor=white" /> | Auth, Database(PostgreSQL), Storage, RLS 보안까지 제공하는 올인원 백엔드 |
 
 </div>
 
@@ -135,15 +135,15 @@ Feed
 |-|-|-|-|
 |![무한스크롤](https://github.com/user-attachments/assets/7d7673c8-874b-46ba-9b71-1e862f31d594)|![피드작성](https://github.com/user-attachments/assets/9010b736-0cc1-41a8-bb45-657daa3f66a3)|![수정](https://github.com/user-attachments/assets/25e7953d-2a0d-4985-8362-ba04d534501e)|![삭제](https://github.com/user-attachments/assets/906d019c-871a-400b-9a61-379f5e53d152)|
 
-|좋아요|피드 아이템|댓글|
-|-|-|-|
-|![좋아요](https://github.com/user-attachments/assets/ff0779d3-aa3a-41f0-a737-3511aa540d69)|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/2e812876-41e8-48fc-818e-fa29f492096e" />|![댓글](https://github.com/user-attachments/assets/cf9dc176-30ab-4ebe-aa82-f997a4095992)|
+|좋아요|피드 아이템|댓글|다크모드|
+|-|-|-|-|
+|![좋아요](https://github.com/user-attachments/assets/ff0779d3-aa3a-41f0-a737-3511aa540d69)|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/2e812876-41e8-48fc-818e-fa29f492096e" />|![댓글](https://github.com/user-attachments/assets/cf9dc176-30ab-4ebe-aa82-f997a4095992)|![다크모드](https://github.com/user-attachments/assets/1b7ddbac-6aed-41b0-9966-e7ea7cdfefe9)|
 
 Profile
 
-|내 프로필|다른 유저 프로필|프로필 수정|
-|-|-|-|
-|![프로필](https://github.com/user-attachments/assets/2f9950c9-bf6b-4304-8bcb-d22f72f9a238)|![제목 없는 디자인](https://github.com/user-attachments/assets/650fa57c-8b7f-4324-ab55-ad2465a5596c)|![프로필 수정](https://github.com/user-attachments/assets/532b3412-2316-4083-a1d1-dc0adab3eae1)|
+|내 프로필|로그아웃|다른 유저 프로필|프로필 수정|
+|-|-|-|-|
+|![프로필](https://github.com/user-attachments/assets/2f9950c9-bf6b-4304-8bcb-d22f72f9a238)| ![로그아웃](https://github.com/user-attachments/assets/bef11c25-fa29-47da-ae35-bd6530a17f85) |![제목 없는 디자인](https://github.com/user-attachments/assets/650fa57c-8b7f-4324-ab55-ad2465a5596c)|![프로필 수정](https://github.com/user-attachments/assets/532b3412-2316-4083-a1d1-dc0adab3eae1)|
 
 <br/>
 
@@ -154,5 +154,7 @@ Profile
 |<img width="1024" alt="페이지 구조도" src="https://github.com/user-attachments/assets/dc28133b-3313-42d6-bee3-2bf8124dfc26" />|<img width="1024" height="1412" alt="sunny-db" src="https://github.com/user-attachments/assets/8f993432-ca86-43e5-bcca-4a87088407dd" />|
 
 <br/>
+
+## 프로젝트 진행하면서 공부한 내용
 
 </div>
