@@ -122,14 +122,28 @@ export { default as TodoDetailPage } from "./pages/TodoDetailPage";
 Auth
 
 |로그인|회원가입|비밀번호 찾기|비밀번호 재설정|
+|-|-|-|-|
+|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/3f86af84-b2c9-4f81-b0a7-21389456c2de" />|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/2d8e0c4b-e7fd-4d2d-a483-8f5f65b1114d" />|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/964e2dec-4882-4462-834c-00b6bcbda11a" />|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/fdd05124-0555-4a39-bef6-f966ef539e77" />|
+
+
+
+
 
 Feed
 
-|홈(피드 리스트)|피드 아이템|댓글|무한 스크롤|좋아요|피드 수정|피드 삭제|
+|홈(피드-무한 스크롤)|피드 작성|피드 수정|피드 삭제|
+|-|-|-|-|
+|![무한스크롤](https://github.com/user-attachments/assets/7d7673c8-874b-46ba-9b71-1e862f31d594)|![피드작성](https://github.com/user-attachments/assets/9010b736-0cc1-41a8-bb45-657daa3f66a3)|![수정](https://github.com/user-attachments/assets/25e7953d-2a0d-4985-8362-ba04d534501e)|![삭제](https://github.com/user-attachments/assets/906d019c-871a-400b-9a61-379f5e53d152)|
+
+|좋아요|피드 아이템|댓글|
+|-|-|-|
+|![좋아요](https://github.com/user-attachments/assets/ff0779d3-aa3a-41f0-a737-3511aa540d69)|<img width="309" height="623" alt="image" src="https://github.com/user-attachments/assets/2e812876-41e8-48fc-818e-fa29f492096e" />|![댓글](https://github.com/user-attachments/assets/cf9dc176-30ab-4ebe-aa82-f997a4095992)|
 
 Profile
 
 |내 프로필|다른 유저 프로필|프로필 수정|
+|-|-|-|
+|![프로필](https://github.com/user-attachments/assets/2f9950c9-bf6b-4304-8bcb-d22f72f9a238)|![제목 없는 디자인](https://github.com/user-attachments/assets/650fa57c-8b7f-4324-ab55-ad2465a5596c)|![프로필 수정](https://github.com/user-attachments/assets/532b3412-2316-4083-a1d1-dc0adab3eae1)|
 
 <br/>
 
@@ -140,8 +154,5 @@ Profile
 |<img width="1024" alt="페이지 구조도" src="https://github.com/user-attachments/assets/dc28133b-3313-42d6-bee3-2bf8124dfc26" />|<img width="1024" height="1412" alt="sunny-db" src="https://github.com/user-attachments/assets/8f993432-ca86-43e5-bcca-4a87088407dd" />|
 
 <br/>
-
-
-## 문제해결 및 해결방안
 
 </div>
