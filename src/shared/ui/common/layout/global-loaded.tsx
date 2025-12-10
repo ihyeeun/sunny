@@ -2,7 +2,7 @@ import sunnyLogo from "@/assets/sunny-transparency.png";
 export default function GlobalLoaded() {
   return (
     <div
-      className="flex w-screen flex-col items-center justify-center"
+      className="layout-container flex w-full flex-col items-center justify-center"
       role="status"
       aria-live="polite"
     >
