@@ -6,7 +6,9 @@ SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
 **피드 작성, 중첩 댓글, 좋아요, 프로필 관리, 무한 스크롤** 등 핵심 소셜 기능을 설계하고 개발한 개인 프로젝트입니다. <br/>
 **인증, 이미지 업로드, 캐싱 최적화** 등 기술의 경험치를 쌓기 위해 진행했습니다.
 
-<a href="https://sunny-sns.vercel.app">sunny-sns.vercel.app</a>
+<a href="https://sunny-sns.vercel.app" target="_blank">
+  <img src="https://img.shields.io/badge/click!-custom?style=social&logo=spoj&logoColor=000&label=SUNNY" />
+</a>
 
 <br/>
 
@@ -157,8 +159,12 @@ export { default as TodoDetailPage } from "./pages/TodoDetailPage";
 
 ## 프로젝트 진행하면서 공부한 내용
 
-|인증/인가|서버상태 관리(Tanstack Query)|Zustand|이미지 업로드|댓글구현|
-|--|--|--|--|--|
+<a href="https://velog.io/@oioigl/%EC%A0%84%EC%97%AD-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC" target="_blank">
+  <img src="https://img.shields.io/badge/click!-custom?style=social&logo=velog&logoColor=20C997&label=Blog%20%7C%20Zustand" />
+</a>
+
+|인증/인가|서버상태 관리(Tanstack Query)|이미지 업로드|댓글구현|
+|--|--|--|--|
 
 </div>
 
