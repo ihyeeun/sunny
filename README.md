@@ -7,7 +7,7 @@ SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
 **인증, 이미지 업로드, 캐싱 최적화** 등 기술의 경험치를 쌓기 위해 진행했습니다.
 
 <a href="https://sunny-sns.vercel.app" target="_blank">
-  <img src="https://img.shields.io/badge/Click!-custom?style=social&logo=spoj&logoColor=000&label=SUNNY" />
+<img src="https://img.shields.io/badge/Ctrl%20%2F%20Cmd%20%2B%20Click!-custom?style=social&logo=spoj&logoColor=000&label=SUNNY" />
 </a>
 
 <br/>
@@ -84,21 +84,21 @@ SUNNY는 Supabase를 기반으로 구현한 SNS 플랫폼으로, <br/>
 ## 프로젝트 규칙
 
 <a href="https://github.com/ihyeeun/sunny/wiki/git-convention" target="_blank">
-  <img src="https://img.shields.io/badge/Click!-custom?style=social&logo=readme&logoColor=000&label=Git-Convention" />
+  <img src="https://img.shields.io/badge/Ctrl%20%2F%20Cmd%20%2B%20Click!-custom?style=social&logo=readme&logoColor=000&label=Git-Convention" />
 </a>
 <br/>
 <a href="https://github.com/ihyeeun/sunny/wiki/Frontend-Architecture" target="_blank">
-  <img src="https://img.shields.io/badge/Click!-custom?style=social&logo=readme&logoColor=000&label=Directory-Structure" />
+  <img src="https://img.shields.io/badge/Ctrl%20%2F%20Cmd%20%2B%20Click!-custom?style=social&logo=readme&logoColor=000&label=Directory-Structure" />
 </a>
 
 ## 프로젝트 진행하면서 공부한 내용
 
 <a href="https://velog.io/@oioigl/%EC%A0%84%EC%97%AD-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC-%EB%8F%84%EA%B5%AC" target="_blank">
-  <img src="https://img.shields.io/badge/Click!-custom?style=social&logo=velog&logoColor=20C997&label=Blog%20%7C%20Zustand" />
+  <img src="https://img.shields.io/badge/Ctrl%20%2F%20Cmd%20%2B%20Click!-custom?style=social&logo=velog&logoColor=20C997&label=Blog%20%7C%20Zustand" />
 </a>
 <br/>
 <a href="https://velog.io/@oioigl/React-%EC%84%9C%EB%B2%84-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0-TanStack-Query-%EC%9E%85%EB%AC%B8%EA%B3%BC-%EC%BA%90%EC%8B%B1-%EC%9B%90%EB%A6%AC" target="_blank">
-  <img src="https://img.shields.io/badge/Click!-custom?style=social&logo=velog&logoColor=20C997&label=Blog%20%7C%20Tanstack-Query" />
+  <img src="https://img.shields.io/badge/Ctrl%20%2F%20Cmd%20%2B%20Click!-custom?style=social&logo=velog&logoColor=20C997&label=Blog%20%7C%20Tanstack-Query" />
 </a>
 <br/>
 
