@@ -18,12 +18,9 @@ export function useInfinteFeedListQuery(authorId?: string) {
       authorId: authorId ?? null,
     }),
     queryFn: async ({ pageParam }) => {
-      const from = pageParam * PAGE_SIZE;
-      const to = from + PAGE_SIZE - 1;
-
       const feeds = await getFeedList({
-        from,
-        to,
+        cursor: pageParam,
+        limit: PAGE_SIZE,
         userId: session?.user.id,
         authorId,
       });
@@ -33,10 +30,11 @@ export function useInfinteFeedListQuery(authorId?: string) {
 
       return feeds.map((feed) => feed.id);
     },
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
+    initialPageParam: undefined as number | undefined,
+    getNextPageParam: (lastPage) => {
       if (lastPage.length < PAGE_SIZE) return undefined;
-      return allPages.length;
+
+      return lastPage[lastPage.length - 1];
     },
     staleTime: Infinity,
   });

@@ -20,24 +20,25 @@ export default function FeedListPage({ authorId }: { authorId?: string }) {
     if (inView) {
       fetchNextPage();
     }
-    // loadMoreRef가 화면에 렌더링 되면 inView = false -> true 로 변환될 것.
   }, [inView]);
 
   if (error) return <Fallback />;
   if (isPending) return <GlobalLoaded />;
 
   return (
-    <ul className="flex flex-col gap-4">
-      {feedsId.pages.map((page) =>
-        page.map((feedId) => (
-          <li key={feedId}>
-            <FeedItem feedId={feedId} feedItemType={FEED_ITEM_TYPE.LIST} />
-            <div className="mt-4 h-0.5 w-full bg-gray-100" />
-          </li>
-        )),
-      )}
-      {isFetchingNextPage && <GlobalLoaded />}
+    <>
+      <ul className="flex flex-col gap-4">
+        {feedsId.pages.map((page) =>
+          page.map((feedId) => (
+            <li key={feedId}>
+              <FeedItem feedId={feedId} feedItemType={FEED_ITEM_TYPE.LIST} />
+              <div className="mt-4 h-0.5 w-full bg-gray-100" />
+            </li>
+          )),
+        )}
+      </ul>
       <div ref={loadMoreRef} />
-    </ul>
+      {isFetchingNextPage && <GlobalLoaded />}
+    </>
   );
 }
