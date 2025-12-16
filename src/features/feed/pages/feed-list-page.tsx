@@ -17,7 +17,7 @@ export default function FeedListPage({ authorId }: { authorId?: string }) {
   const { ref: loadMoreRef, inView } = useInView();
 
   useEffect(() => {
-    if (inView && !isFetchingNextPage) {
+    if (inView) {
       fetchNextPage();
     }
   }, [inView]);
