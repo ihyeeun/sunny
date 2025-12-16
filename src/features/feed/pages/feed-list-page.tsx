@@ -17,10 +17,9 @@ export default function FeedListPage({ authorId }: { authorId?: string }) {
   const { ref: loadMoreRef, inView } = useInView();
 
   useEffect(() => {
-    if (inView) {
+    if (inView && !isFetchingNextPage) {
       fetchNextPage();
     }
-    // loadMoreRef가 화면에 렌더링 되면 inView = false -> true 로 변환될 것.
   }, [inView]);
 
   if (error) return <Fallback />;
