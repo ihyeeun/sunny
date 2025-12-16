@@ -1,13 +1,13 @@
 import supabase from "@shared/lib/supabase";
 
 export async function getFeedList({
-  from,
-  to,
+  cursor,
+  limit,
   userId,
   authorId,
 }: {
-  from: number;
-  to: number;
+  cursor?: number;
+  limit: number;
   userId?: string;
   authorId?: string;
 }) {
@@ -16,9 +16,10 @@ export async function getFeedList({
     .select(
       "*, author: profile!author_id (avatar_image, nickname), myLiked: feedLike!feed_id (id, feed_id, user_id)",
     )
-    .order("created_at", { ascending: false })
-    .range(from, to);
+    .order("id", { ascending: false })
+    .limit(limit);
 
+  if (cursor) query.lt("id", cursor);
   if (userId) query.eq("feedLike.user_id", userId);
   if (authorId) query.eq("author_id", authorId);
 
