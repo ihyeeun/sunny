@@ -26,17 +26,19 @@ export default function FeedListPage({ authorId }: { authorId?: string }) {
   if (isPending) return <GlobalLoaded />;
 
   return (
-    <ul className="flex flex-col gap-4">
-      {feedsId.pages.map((page) =>
-        page.map((feedId) => (
-          <li key={feedId}>
-            <FeedItem feedId={feedId} feedItemType={FEED_ITEM_TYPE.LIST} />
-            <div className="mt-4 h-0.5 w-full bg-gray-100" />
-          </li>
-        )),
-      )}
-      {isFetchingNextPage && <GlobalLoaded />}
+    <>
+      <ul className="flex flex-col gap-4">
+        {feedsId.pages.map((page) =>
+          page.map((feedId) => (
+            <li key={feedId}>
+              <FeedItem feedId={feedId} feedItemType={FEED_ITEM_TYPE.LIST} />
+              <div className="mt-4 h-0.5 w-full bg-gray-100" />
+            </li>
+          )),
+        )}
+      </ul>
       <div ref={loadMoreRef} />
-    </ul>
+      {isFetchingNextPage && <GlobalLoaded />}
+    </>
   );
 }
